@@ -22,6 +22,19 @@ I tested these TFT.
 
 ----
 
+Left to Right   
+2.2 inch SPI 240x320 ILI9340   
+1.44 inch SPI 128x128 ILI9163C   
+1.8 inch SPI 128x160 ST7735   
+
+![spi-tft-display-1](https://user-images.githubusercontent.com/6020549/28999994-c71fa140-7a97-11e7-858e-3110e922b466.JPG)
+
+![spi-tft-display-2](https://user-images.githubusercontent.com/6020549/28999997-cdfd9aee-7a97-11e7-9eaf-51db1f0d74ac.JPG)
+
+![spi-tft-display-3](https://user-images.githubusercontent.com/6020549/29000000-e99b0b74-7a97-11e7-9856-6ae5dc255c0b.JPG)
+
+----
+
 Wirering for SPI TFT   
 
 |TFT||Rpi/OPI|
@@ -157,19 +170,6 @@ R270 : set angle 0
 Start Demo :   
 chmod 777 test.sh   
 ./test.sh   
-
-----
-
-Left to Right   
-2.2 inch SPI 240x320 ILI9340   
-1.44 inch SPI 128x128 ILI9163C   
-1.8 inch SPI 128x160 ST7735   
-
-![spi-tft-display-1](https://user-images.githubusercontent.com/6020549/28999994-c71fa140-7a97-11e7-858e-3110e922b466.JPG)
-
-![spi-tft-display-2](https://user-images.githubusercontent.com/6020549/28999997-cdfd9aee-7a97-11e7-9eaf-51db1f0d74ac.JPG)
-
-![spi-tft-display-3](https://user-images.githubusercontent.com/6020549/29000000-e99b0b74-7a97-11e7-9856-6ae5dc255c0b.JPG)
 
 ----
 
