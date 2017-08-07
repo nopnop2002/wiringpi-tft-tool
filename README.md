@@ -1,11 +1,12 @@
 # wiringpi-tft-tool
 TFT Command Line Tool for Raspberry Pi/Orange Pi   
 
-This is Command Line Tool for Raspberry Pi/Orange Pi.   
 You can operate from command line.   
+You can show any text string.   
 You can choose BCM2835 library/WiringPi(WiringOp) library.   
 
 I tested these TFT.   
+
 1.44 inch SPI 128x128 ST7735   
 1.44 inch SPI 128x128 ILI9163C   
 1.8 inch SPI 128x160 ST7735   
@@ -13,23 +14,55 @@ I tested these TFT.
 2.4 inch SPI 240x320 ILI9341   
 2.4 inch SPI 240x320 ILI9341   
 
+2.0 inch 8bit Parallel 240x320 S6D1121   
+2.4 inch 8bit Parallel 240x320 ILI9325   
+2.4 inch 8bit Parallel 240x320 ILI9341   
+2.4 inch 8bit Parallel 240x320 ILI9342   
+3.5 inch 8bit Parallel 240x320 ILI9481   
+
 ----
 
 Wirering for SPI TFT   
 
-|SPI-TFT||Rpi/OPI|
+|TFT||Rpi/OPI|
 |:-:|:-:|:-:|
 |MISO|--|N/C|
 |LED|--|3.3V|
 |SCK|--|Pin#23(SPI SCLK)|
 |MOSI|--|Pin#19(SPI MOSI)|
-|D/C|--|Pin#3(*)|
-|RES|--|Pin#5(*)|
+|D/C|--|Pin#3(**)|
+|RES|--|Pin#5(**)|
 |CS|--|Pin#24(SPI CE0)|
 |GND|--|GND|
 |VCC|--|3.3V|
 
-(*) You can change any pin.   
+**You can change any pin.   
+
+----
+
+Wirering for 8bit Parallel TFT   
+
+|TFT||Rpi/Opi|
+|:-:|:-:|:-:|
+|LCD_RST|--|Pin#7|
+|LCD_CS|--|Pin#3|
+|LCD_RS|--|Pin#5|
+|LCD_WR|--|Pin#26|
+|LCD_RD|--|Pin#28|
+|LCD_D0|--|Pin#29|
+|LCD_D1|--|Pin#31|
+|LCD_D2|--|Pin#33|
+|LCD_D3|--|Pin#35|
+|LCD_D4|--|Pin#37|
+|LCD_D5|--|Pin#32|
+|LCD_D6|--|Pin#36|
+|LCD_D7|--|Pin#38|
+|5V|--|5V(**)|
+|3.3V|--|3.3V(**)|
+|GND|--|GND|
+
+**When a regulator(It's often AMS1117) is mounted on the back, it's operated 5V.   
+**When a regulator is NOT mounted on the back, it's operated 3.3V.   
 
 ----
 
@@ -52,8 +85,48 @@ cc -o tft tft.c fontx.c spilib.c -lbcm2835 -lm -DSPI -DBCM
 build for SPI TFT (using WiringPi/WiringOp library)   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd spi-tft-tool   
+cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c spilib.c -lwiringPi -lm -DSPI -DWPI
+
+----
+
+build for 8bit Parallel TFT (ILI9325)   
+
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9325   
+
+----
+
+build for 8bit Parallel TFT (ILI9341)   
+
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9341   
+
+----
+
+build for 8bit Parallel TFT (ILI9342)   
+
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9342   
+
+----
+
+build for 8bit Parallel TFT (ILI9481)   
+
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481   
+
+----
+
+build for 8bit Parallel TFT (S6D1121)   
+
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DS6D1121   
 
 ----
 
