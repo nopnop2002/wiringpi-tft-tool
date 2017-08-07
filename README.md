@@ -66,7 +66,7 @@ Wirering for 8bit Parallel TFT
 
 ----
 
-build for SPI TFT (using BCM2835 library, RPi Only, Very fast)  
+Build for SPI TFT (using BCM2835 library, RPi Only, Very fast)  
 
 wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.42.tar.gz   
 tar zxvf bcm2835-1.42.tar.gz   
@@ -82,7 +82,7 @@ cc -o tft tft.c fontx.c spilib.c -lbcm2835 -lm -DSPI -DBCM
 
 ----
 
-build for SPI TFT (using WiringPi/WiringOp library)   
+Build for SPI TFT (using WiringPi/WiringOp library)   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -90,7 +90,7 @@ cc -o tft tft.c fontx.c spilib.c -lwiringPi -lm -DSPI -DWPI
 
 ----
 
-build for 8bit Parallel TFT (ILI9325)   
+Build for 8bit Parallel TFT (ILI9325)   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -98,7 +98,7 @@ cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9325
 
 ----
 
-build for 8bit Parallel TFT (ILI9341)   
+Build for 8bit Parallel TFT (ILI9341)   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -106,7 +106,7 @@ cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9341
 
 ----
 
-build for 8bit Parallel TFT (ILI9342)   
+Build for 8bit Parallel TFT (ILI9342)   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -114,7 +114,7 @@ cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9342
 
 ----
 
-build for 8bit Parallel TFT (ILI9481)   
+Build for 8bit Parallel TFT (ILI9481)   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -122,7 +122,7 @@ cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481
 
 ----
 
-build for 8bit Parallel TFT (S6D1121)   
+Build for 8bit Parallel TFT (S6D1121)   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
