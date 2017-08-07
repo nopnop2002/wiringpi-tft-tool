@@ -171,5 +171,11 @@ Left to Right
 
 ![spi-tft-display-3](https://user-images.githubusercontent.com/6020549/29000000-e99b0b74-7a97-11e7-9856-6ae5dc255c0b.JPG)
 
-![spi-tft-display-4](https://user-images.githubusercontent.com/6020549/29019732-71e6de4c-7b9a-11e7-8bab-5515bd38be34.jpg)
+----
+
+OrangePi   
+![tft-opi](https://user-images.githubusercontent.com/6020549/29032790-c4407f94-7bcd-11e7-92f4-1c7e40978386.jpg)
+
+RaspberryPi   
+![tft-rpi](https://user-images.githubusercontent.com/6020549/29032792-c9fb2b32-7bcd-11e7-92e6-721f2ce276fa.jpg)
 
