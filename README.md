@@ -33,7 +33,7 @@ Wirering for SPI TFT
 
 ----
 
-build using BCM2835 library(RPi Only)  
+build for SPI TFT (using BCM2835 library, RPi Only, Very fast)  
 
 wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.42.tar.gz   
 tar zxvf bcm2835-1.42.tar.gz   
@@ -49,7 +49,7 @@ cc -o tft tft.c fontx.c spilib.c -lbcm2835 -lm -DSPI -DBCM
 
 ----
 
-build using WiringPi(WiringOp) library   
+build for SPI TFT (using WiringPi/WiringOp library)   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd spi-tft-tool   
