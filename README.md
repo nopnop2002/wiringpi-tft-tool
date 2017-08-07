@@ -18,7 +18,7 @@ I tested these TFT.
 2.4 inch 8bit Parallel 240x320 ILI9325   
 2.4 inch 8bit Parallel 240x320 ILI9341   
 2.4 inch 8bit Parallel 240x320 ILI9342   
-3.5 inch 8bit Parallel 240x320 ILI9481   
+3.5 inch 8bit Parallel 320x480 ILI9481   
 
 ----
 
