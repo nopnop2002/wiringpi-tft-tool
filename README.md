@@ -107,7 +107,7 @@ Build for 8bit Parallel ILI9325 TFT (using WiringPi/WiringOp library, Both of RP
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9325   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9325   
 
 ----
 
@@ -115,7 +115,7 @@ Build for 8bit Parallel ILI9341 TFT (using WiringPi/WiringOp library, Both of RP
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9341   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9341   
 
 ----
 
@@ -123,7 +123,7 @@ Build for 8bit Parallel ILI9342 TFT (using WiringPi/WiringOp library, Both of RP
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9342   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9342   
 
 ----
 
@@ -131,7 +131,7 @@ Build for 8bit Parallel ILI9481 TFT (using WiringPi/WiringOp library, Both of RP
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481   
 
 ----
 
@@ -139,7 +139,7 @@ Build for 8bit Parallel S6D1121 TFT (using WiringPi/WiringOp library, Both of RP
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o ili9325 tft.c fontx.c 8bitlib.c -lwiringPi -lm -DS6D1121   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DS6D1121   
 
 ----
 
