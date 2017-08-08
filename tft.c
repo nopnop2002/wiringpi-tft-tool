@@ -405,6 +405,35 @@ if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
   if (strcmp(argv[1],"D") == 0) {
     DumpSaveFrame(sv);
   }
+
+  if (strcmp(argv[1],"M") == 0) {
+#ifdef SPI
+    printf("SPI");
+#endif
+
+#ifdef ILI9325
+    printf("ILI9325");
+#endif
+
+#ifdef ILI9341
+    printf("ILI9341");
+#endif
+
+#ifdef ILI9342
+    printf("ILI9342");
+#endif
+
+#ifdef ILI9481
+    printf("ILI9481");
+#endif
+
+#ifdef S6D1121
+    printf("S6D1121");
+#endif
+    printf("(%3dx%3d)\n",XMAX,YMAX);
+  }
+
+
 }
 
 

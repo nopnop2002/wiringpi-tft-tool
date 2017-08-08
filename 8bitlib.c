@@ -13,6 +13,7 @@
 #include <wiringPi.h>
 #include "8bitlib.h"
 
+#ifndef ZERO
 #define LCD_RST 7
 #define LCD_CS  8
 #define LCD_RS  9
@@ -27,6 +28,24 @@
 #define LCD_D5 26
 #define LCD_D6 27
 #define LCD_D7 28
+#endif
+
+#ifdef ZERO
+#define LCD_RST 14
+#define LCD_CS  13
+#define LCD_RS  12
+#define LCD_WR   3
+#define LCD_RD   2
+
+#define LCD_D0 16
+#define LCD_D1 15
+#define LCD_D2 11
+#define LCD_D3 10
+#define LCD_D4  6
+#define LCD_D5  5
+#define LCD_D6  4
+#define LCD_D7  1
+#endif
 
 #define _DEBUG_ 0
 

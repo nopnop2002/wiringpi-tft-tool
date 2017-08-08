@@ -52,7 +52,7 @@ Wirering for SPI TFT
 
 ----
 
-Wirering for 8bit Parallel TFT   
+Wirering for 8bit Parallel TFT(Rpi/OpiPC/OpiLite/OpiOne/OpiPlus)   
 
 |TFT||Rpi/Opi|
 |:-:|:-:|:-:|
@@ -69,6 +69,32 @@ Wirering for 8bit Parallel TFT
 |LCD_D5|--|Pin#32|
 |LCD_D6|--|Pin#36|
 |LCD_D7|--|Pin#38|
+|5V|--|5V(**)|
+|3.3V|--|3.3V(**)|
+|GND|--|GND|
+
+**When a regulator(It's often AMS1117) is mounted on the back, it's operated 5V.   
+**When a regulator is NOT mounted on the back, it's operated 3.3V.   
+
+----
+
+Wirering for 8bit Parallel TFT(OpiZERO)   
+
+|TFT||OpiZERO|
+|:-:|:-:|:-:|
+|LCD_RST|--|Pin#23|
+|LCD_CS|--|Pin#21|
+|LCD_RS|--|Pin#19|
+|LCD_WR|--|Pin#15|
+|LCD_RD|--|Pin#13|
+|LCD_D0|--|Pin#10|
+|LCD_D1|--|Pin#8|
+|LCD_D2|--|Pin#26|
+|LCD_D3|--|Pin#24|
+|LCD_D4|--|Pin#22|
+|LCD_D5|--|Pin#18|
+|LCD_D6|--|Pin#16|
+|LCD_D7|--|Pin#12|
 |5V|--|5V(**)|
 |3.3V|--|3.3V(**)|
 |GND|--|GND|
@@ -108,6 +134,9 @@ git clone https://github.com/nopnop2002/wiringpi-tft-tool
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9325   
 
+for OpiZERO   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9325 -DZERO   
+
 ----
 
 Build for 8bit Parallel ILI9341 TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
@@ -115,6 +144,9 @@ Build for 8bit Parallel ILI9341 TFT (using WiringPi/WiringOp library, Both of RP
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9341   
+
+for OpiZERO   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9341 -DZERO   
 
 ----
 
@@ -124,6 +156,9 @@ git clone https://github.com/nopnop2002/wiringpi-tft-tool
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9342   
 
+for OpiZERO   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9342 -DZERO   
+
 ----
 
 Build for 8bit Parallel ILI9481 TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
@@ -132,6 +167,9 @@ git clone https://github.com/nopnop2002/wiringpi-tft-tool
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481   
 
+for OpiZERO   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481 -DZERO   
+
 ----
 
 Build for 8bit Parallel S6D1121 TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
@@ -139,6 +177,9 @@ Build for 8bit Parallel S6D1121 TFT (using WiringPi/WiringOp library, Both of RP
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DS6D1121   
+
+for OpiZERO   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DS6D1121 -DZERO   
 
 ----
 
