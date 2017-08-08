@@ -7,18 +7,17 @@ You can choose BCM2835 library/WiringPi(WiringOp) library.
 
 I tested these TFT.   
 
-1.44 inch SPI 128x128 ST7735   
-1.44 inch SPI 128x128 ILI9163C   
-1.8 inch SPI 128x160 ST7735   
-2.2 inch SPI 240x320 ILI9340   
-2.4 inch SPI 240x320 ILI9341   
-2.4 inch SPI 240x320 ILI9341   
+SPI 128x128 ST7735   
+SPI 128x128 ILI9163C   
+SPI 128x160 ST7735   
+SPI 240x320 ILI9340   
+SPI 240x320 ILI9341   
 
-2.0 inch 8bit Parallel 240x320 S6D1121   
-2.4 inch 8bit Parallel 240x320 ILI9325   
-2.4 inch 8bit Parallel 240x320 ILI9341   
-2.4 inch 8bit Parallel 240x320 ILI9342   
-3.5 inch 8bit Parallel 320x480 ILI9481   
+8bit Parallel 240x320 S6D1121   
+8bit Parallel 240x320 ILI9325   
+8bit Parallel 240x320 ILI9341   
+8bit Parallel 240x320 ILI9342   
+8bit Parallel 320x480 ILI9481   
 
 ----
 
