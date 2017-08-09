@@ -1,5 +1,11 @@
 #include "fontx.h"
 
+typedef struct {
+  uint8_t rst;
+  uint8_t rs;
+  uint8_t ch;
+} SPIPin;
+
 #define RED             0xf800
 #define GREEN           0x07e0
 #define BLUE            0x001f
@@ -18,7 +24,7 @@
 void lcdWriteCommandByte(uint8_t c);
 void lcdWriteDataByte(uint8_t c);
 void lcdWriteDataWord(uint16_t w);
-void lcdInit(uint16_t width, uint16_t height);
+void lcdInit(uint16_t width, uint16_t height, SPIPin pin);
 void lcdReset(void);
 void lcdSetup(void);
 void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color);

@@ -12,7 +12,7 @@
 // SCK-------SCLK(23)
 // MOSI------MOSI(19)
 // D/C-------IO02( 3)  LOW = 0 = COMMAND
-// RES-------IO03( 5)  LOW = 0 = RESET
+// RST-------IO03( 5)  LOW = 0 = RESET
 // CS--------CS0 (24)  LOW = 0 = Chip Select
 // GND-------0V  ( 6)
 // VCC-------3.3V( 1)
@@ -41,12 +41,6 @@
 #endif
 #include "spilib.h"
 
-#define D_C  2  // GPIO2
-#define RES  3  // GPIO3
-#define C_S  8  // GPIO8
-
-//#define XMAX    240
-//#define YMAX    320
 #define _DEBUG_ 0
 
 uint16_t _FONT_DIRECTION_;
@@ -57,24 +51,27 @@ uint16_t _FONT_UNDER_LINE_COLOR_;
 
 uint16_t _width;
 uint16_t _height;
+uint16_t RS;
+uint16_t RST;
+uint16_t CS;
 
 #ifdef WPI
 // SPI Write Command 8Bit
 // D/C=LOW then,write command(8bit)
 void lcdWriteCommandByte(uint8_t c){
-//  digitalWrite(C_S,LOW);
-  digitalWrite(D_C,LOW);
+//  digitalWrite(CS,LOW);
+  digitalWrite(RS,LOW);
   wiringPiSPIDataRW(0, &c, 1);
-//  digitalWrite(C_S,HIGH);
+//  digitalWrite(CS,HIGH);
 }
 
 // SPI Write Data 8Bit
 // D/C=HIGH then,write data(8bit)
 void lcdWriteDataByte(uint8_t c){
-//  digitalWrite(C_S,LOW);
-  digitalWrite(D_C,HIGH);
+//  digitalWrite(CS,LOW);
+  digitalWrite(RS,HIGH);
   wiringPiSPIDataRW(0, &c, 1);
-//  digitalWrite(C_S,HIGH);
+//  digitalWrite(CS,HIGH);
 }
 #endif
 
@@ -84,18 +81,16 @@ void lcdWriteDataByte(uint8_t c){
 // D/C=LOW then,write command(8bit)
 void lcdWriteCommandByte(uint8_t c){
   int data;
-  bcm2835_gpio_write(D_C,LOW);
+  bcm2835_gpio_write(RS,LOW);
   data = bcm2835_spi_transfer(c);
-  bcm2835_gpio_write(D_C,HIGH);
-// printf("COMMAND: %02X\n", c);
-// printf("DATA: %02X\n", data);
+  bcm2835_gpio_write(RS,HIGH);
 }
 
 // SPI Write Data 8Bit
 // D/C=HIGH then,write data(8bit)
 void lcdWriteDataByte(uint8_t c){
   int data;
-  bcm2835_gpio_write(D_C,HIGH);
+  bcm2835_gpio_write(RS,HIGH);
   data = bcm2835_spi_transfer(c);
 }
 #endif
@@ -113,9 +108,12 @@ void lcdWriteDataWord(uint16_t w){
 #ifdef WPI
 // SPI interfase initialize
 // MSB,mode0,clock=8,cs0=low
-void lcdInit(uint16_t width, uint16_t height){
+void lcdInit(uint16_t width, uint16_t height, SPIPin pin) {
   _width = width;
   _height = height;
+  RST = pin.rst;
+  RS  = pin.rs;
+  CS  = 8; // GPIO8
 
   if (wiringPiSetupGpio() == -1) {
     printf("wiringPiSetup Error\n");
@@ -130,15 +128,15 @@ void lcdInit(uint16_t width, uint16_t height){
 
 }
 void lcdReset(void){
-  pinMode(D_C,OUTPUT);
-  pinMode(RES,OUTPUT);
-  pinMode(C_S,OUTPUT);
-  digitalWrite(D_C,HIGH);   // D/C = H
-  digitalWrite(C_S,LOW);    // CS = L
+  pinMode(RS,OUTPUT);
+  pinMode(RST,OUTPUT);
+  pinMode(CS,OUTPUT);
+  digitalWrite(RS,HIGH);   // D/C = H
+  digitalWrite(CS,LOW);    // CS = L
 
-  digitalWrite(RES, LOW);    // Reset low
+  digitalWrite(RST, LOW);    // Reset low
   delay(100);
-  digitalWrite(RES, HIGH);   // Reset high
+  digitalWrite(RST, HIGH);   // Reset high
   delay(100);
 }
 #endif
@@ -146,9 +144,12 @@ void lcdReset(void){
 #ifdef BCM
 // SPI interfase initialize
 // MSB,mode0,clock=8,cs0=low
-void lcdInit(uint16_t width, uint16_t height){
+void lcdInit(uint16_t width, uint16_t height, SPIPin pin) {
   _width = width;
   _height = height;
+  RST = pin.rst;
+  RS  = pin.rs;
+
   if (bcm2835_init() == -1) {
     printf("bmc2835_init Error\n");
     return;
@@ -171,13 +172,13 @@ void lcdInit(uint16_t width, uint16_t height){
 
 // TFT Reset
 void lcdReset(void){
-  bcm2835_gpio_fsel(D_C,BCM2835_GPIO_FSEL_OUTP); // D/C
-  bcm2835_gpio_fsel(RES,BCM2835_GPIO_FSEL_OUTP); // Reset
-  bcm2835_gpio_write(D_C, HIGH);   // D/C = H
+  bcm2835_gpio_fsel(RS,BCM2835_GPIO_FSEL_OUTP); // D/C
+  bcm2835_gpio_fsel(RST,BCM2835_GPIO_FSEL_OUTP); // Reset
+  bcm2835_gpio_write(RS, HIGH);   // D/C = H
 
-  bcm2835_gpio_write(RES, LOW);   // Reset
+  bcm2835_gpio_write(RST, LOW);   // Reset
   bcm2835_delay(100);
-  bcm2835_gpio_write(RES, HIGH);   // Reset off
+  bcm2835_gpio_write(RST, HIGH);   // Reset off
   bcm2835_delay(100); 
 }
 #endif

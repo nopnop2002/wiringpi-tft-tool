@@ -41,7 +41,12 @@ void usage(char *prog);
 void InitSaveData(SaveFrame *hoge);
 void DumpSaveFrame(SaveFrame hoge);
 int ReadTFTConfig(char *path, int *width, int *height);
+#ifdef SPI
+int ReadSpiConfig(SPIPin *pins, char *path);
+#endif
+#ifndef SPI
 int ReadPinConfig(TFTPin *pins, char *path);
+#endif
 
 int main(int argc, char **argv){
   int i,j,k;
@@ -84,10 +89,11 @@ if(_DEBUG_)  printf("ReadTFTConfig:XMAX=%d YMAX=%d\n",XMAX,YMAX);
 
 #ifdef SPI
   SPIPin pins;
-  pins.rst = 9;
-  pins.rs  = 8;
-  ReadPinConfig(&pins, spath);
-if(_DEBUG_)printf("rst=%d cs=%d\n", pins.rst,pins.rs);
+  pins.rst = 3;
+  pins.rs  = 2;
+  pins.ch  = 0;
+  ReadSpiConfig(&pins, spath);
+if(_DEBUG_)printf("rst=%d cs=%d ch=%d\n", pins.rst,pins.rs,pins.ch);
 #endif
 
 #ifndef SPI
@@ -368,7 +374,7 @@ if(_DEBUG_)printf("fnameh=%s\nfnamez=%s\n",fnameh,fnamez);
     Fontx_init(fx,fnameh,fnamez);
 
 #ifdef SPI
-    lcdInit(XMAX, YMAX);
+    lcdInit(XMAX, YMAX, pins);
 #endif
 
 #ifdef ILI9325
@@ -477,6 +483,7 @@ if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
 #ifdef SPI
     printf("RST=%d\n",pins.rst);
     printf("RS =%d\n",pins.rs);
+//    printf("CH =%d\n",pins.ch);
 #endif
 
 #ifndef SPI
@@ -572,6 +579,36 @@ int ReadTFTConfig(char *path, int *width, int *height) {
   return 1;
 }
 
+#ifdef SPI
+int ReadSpiConfig(SPIPin *pin, char *path) {
+  FILE *fp;
+  char buff[128];
+  int wk;
+  
+//  printf("path=%s\n",path);
+  fp = fopen(path,"r");
+  if(fp == NULL) return 0;
+  while (fgets(buff,128,fp) != NULL) {
+//    printf("buf=%s\n",buff);
+//    printf("buff[0]=%x\n",buff[0]);
+    if (buff[0] == '#') continue;
+    if (buff[0] == 0x0a) continue;
+    if (strncmp(buff,"RST=",4) == 0) {
+      sscanf(buff, "RST=%d", &(pin->rst));
+    } else if (strncmp(buff,"RS=",3) == 0) {
+      sscanf(buff, "RS=%d", &(pin->rs));
+//    } else if (strncmp(buff,"CH=",3) == 0) {
+//      sscanf(buff, "CH=%d", &(pin->ch));
+    }
+
+  }
+  fclose(fp);
+  return 1;
+
+}
+#endif
+
+#ifndef SPI
 int ReadPinConfig(TFTPin *pin, char *path) {
   FILE *fp;
   char buff[128];
@@ -589,10 +626,7 @@ int ReadPinConfig(TFTPin *pin, char *path) {
       sscanf(buff, "RST=%d", &(pin->rst));
     } else if (strncmp(buff,"RS=",3) == 0) {
       sscanf(buff, "RS=%d", &(pin->rs));
-    }
-
-#ifndef SPI
-    if (strncmp(buff,"CS=",3) == 0) {
+    } else if (strncmp(buff,"CS=",3) == 0) {
       sscanf(buff, "CS=%d", &(pin->cs));
     } else if (strncmp(buff,"WR=",3) == 0) {
       sscanf(buff, "WR=%d", &(pin->wr));
@@ -615,10 +649,10 @@ int ReadPinConfig(TFTPin *pin, char *path) {
     } else if (strncmp(buff,"D7=",3) == 0) {
       sscanf(buff, "D7=%d", &(pin->d7));
     }
-#endif
 
   }
   fclose(fp);
   return 1;
 
 }
+#endif
