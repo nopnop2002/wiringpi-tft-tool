@@ -52,7 +52,7 @@ Wirering for SPI TFT
 
 ----
 
-Wirering for 8bit Parallel TFT(Rpi/OpiPC/OpiLite/OpiOne/OpiPlus)   
+Wirering for 8bit Parallel TFT(Rpi/Opi 40 Pin Header Model)   
 
 |TFT||Rpi/Opi|
 |:-:|:-:|:-:|
@@ -78,9 +78,9 @@ Wirering for 8bit Parallel TFT(Rpi/OpiPC/OpiLite/OpiOne/OpiPlus)
 
 ----
 
-Wirering for 8bit Parallel TFT(OpiZERO)   
+Wirering for 8bit Parallel TFT(Rpi/Opi 26 Pin Header Model)   
 
-|TFT||OpiZERO|
+|TFT||Rpi/Opi|
 |:-:|:-:|:-:|
 |LCD_RST|--|Pin#23|
 |LCD_CS|--|Pin#21|
@@ -134,7 +134,7 @@ git clone https://github.com/nopnop2002/wiringpi-tft-tool
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9325   
 
-for OpiZERO   
+for 26 Pin Header Model   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9325 -DZERO   
 
 ----
@@ -145,7 +145,7 @@ git clone https://github.com/nopnop2002/wiringpi-tft-tool
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9341   
 
-for OpiZERO   
+for 26 Pin Header Model   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9341 -DZERO   
 
 ----
@@ -156,7 +156,7 @@ git clone https://github.com/nopnop2002/wiringpi-tft-tool
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9342   
 
-for OpiZERO   
+for 26 Pin Header Model   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9342 -DZERO   
 
 ----
@@ -167,7 +167,7 @@ git clone https://github.com/nopnop2002/wiringpi-tft-tool
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481   
 
-for OpiZERO   
+for 26 Pin Header Model   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481 -DZERO   
 
 ----
@@ -178,7 +178,7 @@ git clone https://github.com/nopnop2002/wiringpi-tft-tool
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DS6D1121   
 
-for OpiZERO   
+for 26 Pin Header Model   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DS6D1121 -DZERO   
 
 ----
