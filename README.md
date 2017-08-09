@@ -49,6 +49,7 @@ Wirering for SPI TFT
 |VCC|--|3.3V|
 
 **You can change any pin.   
+**Pin define is "spi.conf".   
 
 ----
 
