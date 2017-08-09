@@ -151,6 +151,9 @@ How to use
 At first, edit "tft.conf".   
 Set your TFT's resolution.   
 
+If you use SPI TFT, check "spi.conf".   
+Set your pin assignment.   
+
 If you use 8bit Parallel TFT, check "pin.conf".   
 Set your pin assignment.   
 
