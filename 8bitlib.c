@@ -13,40 +13,6 @@
 #include <wiringPi.h>
 #include "8bitlib.h"
 
-#ifndef ZERO
-#define LCD_RST 7
-#define LCD_CS  8
-#define LCD_RS  9
-#define LCD_WR 11
-#define LCD_RD 31
-
-#define LCD_D0 21
-#define LCD_D1 22
-#define LCD_D2 23
-#define LCD_D3 24
-#define LCD_D4 25
-#define LCD_D5 26
-#define LCD_D6 27
-#define LCD_D7 28
-#endif
-
-#ifdef ZERO
-#define LCD_RST 14
-#define LCD_CS  13
-#define LCD_RS  12
-#define LCD_WR   3
-#define LCD_RD   2
-
-#define LCD_D0 16
-#define LCD_D1 15
-#define LCD_D2 11
-#define LCD_D3 10
-#define LCD_D4  6
-#define LCD_D5  5
-#define LCD_D6  4
-#define LCD_D7  1
-#endif
-
 #define _DEBUG_ 0
 
 uint16_t _FONT_DIRECTION_;
@@ -58,6 +24,21 @@ uint16_t _FONT_UNDER_LINE_COLOR_;
 uint16_t _model;
 uint16_t _width;
 uint16_t _height;
+
+uint16_t LCD_RST;
+uint16_t LCD_CS;
+uint16_t LCD_RS;
+uint16_t LCD_WR;
+uint16_t LCD_RD;
+
+uint16_t LCD_D0;
+uint16_t LCD_D1;
+uint16_t LCD_D2;
+uint16_t LCD_D3;
+uint16_t LCD_D4;
+uint16_t LCD_D5;
+uint16_t LCD_D6;
+uint16_t LCD_D7;
 
 void lcdWriteByte(uint8_t data) {
   digitalWrite(LCD_D0, data & 1);
@@ -158,10 +139,25 @@ void lcdWriteRegisterByte(uint8_t addr, uint16_t data) {
 }
 
 
-void lcdInit(uint16_t model, uint16_t width, uint16_t height) {
+void lcdInit(uint16_t model, uint16_t width, uint16_t height, TFTPin pin) {
   _model = model;
   _width = width;
   _height = height;
+
+  LCD_RST = pin.rst;
+  LCD_CS  = pin.cs;
+  LCD_RS  = pin.rs;
+  LCD_WR  = pin.wr;
+  LCD_RD  = pin.rd;
+
+  LCD_D0  = pin.d0;
+  LCD_D1  = pin.d1;
+  LCD_D2  = pin.d2;
+  LCD_D3  = pin.d3;
+  LCD_D4  = pin.d4;
+  LCD_D5  = pin.d5;
+  LCD_D6  = pin.d6;
+  LCD_D7  = pin.d7;
 
   if(wiringPiSetup() == -1) {
     printf("Setup Fail\n");

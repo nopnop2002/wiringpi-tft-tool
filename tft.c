@@ -40,7 +40,8 @@ typedef struct {
 void usage(char *prog);
 void InitSaveData(SaveFrame *hoge);
 void DumpSaveFrame(SaveFrame hoge);
-int ReadConfig(char *path, int *width, int *height);
+int ReadTFTConfig(char *path, int *width, int *height);
+int ReadPinConfig(TFTPin *pins, char *path);
 
 int main(int argc, char **argv){
   int i,j,k;
@@ -48,6 +49,8 @@ int main(int argc, char **argv){
   char dir[128];
   char cpath[128];
   char dpath[128];
+  char spath[128];
+  char ppath[128];
   FILE *fp;
   SaveFrame sv;
   
@@ -66,12 +69,49 @@ if(_DEBUG_)  printf("dpath=%s\n",dpath);
   strcpy(cpath,dir);
   strcat(cpath,"tft.conf");
 if(_DEBUG_)  printf("cpath=%s\n",cpath);
+  strcpy(spath,dir);
+  strcat(spath,"spi.conf");
+if(_DEBUG_)  printf("spath=%s\n",spath);
+  strcpy(ppath,dir);
+  strcat(ppath,"pin.conf");
+if(_DEBUG_)  printf("ppath=%s\n",ppath);
 
-  if (ReadConfig(cpath,&XMAX,&YMAX) == 0) {
+  if (ReadTFTConfig(cpath,&XMAX,&YMAX) == 0) {
     printf("%s Not found\n",cpath);
     return 0;
   }
-if(_DEBUG_)  printf("ReadConfig:XMAX=%d YMAX=%d\n",XMAX,YMAX);
+if(_DEBUG_)  printf("ReadTFTConfig:XMAX=%d YMAX=%d\n",XMAX,YMAX);
+
+#ifdef SPI
+  SPIPin pins;
+  pins.rst = 9;
+  pins.rs  = 8;
+  ReadPinConfig(&pins, spath);
+if(_DEBUG_)printf("rst=%d cs=%d\n", pins.rst,pins.rs);
+#endif
+
+#ifndef SPI
+  TFTPin pins;
+  pins.rst = 7;
+  pins.cs  = 8;
+  pins.rs  = 9;
+  pins.wr  = 11;
+  pins.rd  = 31;
+  pins.d0  = 21;
+  pins.d1  = 22;
+  pins.d2  = 23;
+  pins.d3  = 24;
+  pins.d4  = 25;
+  pins.d5  = 26;
+  pins.d6  = 27;
+  pins.d7  = 28;
+  ReadPinConfig(&pins, ppath);
+if(_DEBUG_)printf("rst=%d cs=%d rs=%d wr=%d rd=%d\n",
+  pins.rst,pins.cs,pins.rs,pins.wr,pins.rd);
+if(_DEBUG_)printf("d0=%d d1=%d d2=%d d4=%d d4=%d d5=%d d6=%d d7=%d\n",
+  pins.d0,pins.d1,pins.d2,pins.d3,pins.d4,pins.d5,pins.d6,pins.d7);
+#endif
+
 
   struct stat stat_buf;
   if (stat(dpath,&stat_buf) == 0) {
@@ -332,23 +372,23 @@ if(_DEBUG_)printf("fnameh=%s\nfnamez=%s\n",fnameh,fnamez);
 #endif
 
 #ifdef ILI9325
-    lcdInit(0x9325, XMAX, YMAX);
+    lcdInit(0x9325, XMAX, YMAX, pins);
 #endif
 
 #ifdef ILI9341
-    lcdInit(0x9341, XMAX, YMAX);
+    lcdInit(0x9341, XMAX, YMAX, pins);
 #endif
 
 #ifdef ILI9342
-    lcdInit(0x9342, XMAX, YMAX);
+    lcdInit(0x9342, XMAX, YMAX, pins);
 #endif
 
 #ifdef ILI9481
-    lcdInit(0x9481, XMAX, YMAX);
+    lcdInit(0x9481, XMAX, YMAX, pins);
 #endif
 
 #ifdef S6D1121
-    lcdInit(0x1121, XMAX, YMAX);
+    lcdInit(0x1121, XMAX, YMAX, pins);
 #endif
 
     lcdReset();
@@ -433,6 +473,28 @@ if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
     printf("(%3dx%3d)\n",XMAX,YMAX);
   }
 
+  if (strcmp(argv[1],"P") == 0) {
+#ifdef SPI
+    printf("RST=%d\n",pins.rst);
+    printf("RS =%d\n",pins.rs);
+#endif
+
+#ifndef SPI
+    printf("RST=%d\n",pins.rst);
+    printf("CS =%d\n",pins.cs);
+    printf("RS =%d\n",pins.rs);
+    printf("WR =%d\n",pins.wr);
+    printf("RD =%d\n",pins.rd);
+    printf("D0 =%d\n",pins.d0);
+    printf("D1 =%d\n",pins.d1);
+    printf("D2 =%d\n",pins.d2);
+    printf("D3 =%d\n",pins.d3);
+    printf("D4 =%d\n",pins.d4);
+    printf("D5 =%d\n",pins.d5);
+    printf("D6 =%d\n",pins.d6);
+    printf("D7 =%d\n",pins.d7);
+#endif
+  }
 
 }
 
@@ -491,7 +553,7 @@ void DumpSaveFrame(SaveFrame hoge) {
 
 }
 
-int ReadConfig(char *path, int *width, int *height) {
+int ReadTFTConfig(char *path, int *width, int *height) {
   FILE *fp;
   char buff[128];
   
@@ -508,4 +570,55 @@ int ReadConfig(char *path, int *width, int *height) {
   }
   fclose(fp);
   return 1;
+}
+
+int ReadPinConfig(TFTPin *pin, char *path) {
+  FILE *fp;
+  char buff[128];
+  int wk;
+  
+//  printf("path=%s\n",path);
+  fp = fopen(path,"r");
+  if(fp == NULL) return 0;
+  while (fgets(buff,128,fp) != NULL) {
+//    printf("buf=%s\n",buff);
+//    printf("buff[0]=%x\n",buff[0]);
+    if (buff[0] == '#') continue;
+    if (buff[0] == 0x0a) continue;
+    if (strncmp(buff,"RST=",4) == 0) {
+      sscanf(buff, "RST=%d", &(pin->rst));
+    } else if (strncmp(buff,"RS=",3) == 0) {
+      sscanf(buff, "RS=%d", &(pin->rs));
+    }
+
+#ifndef SPI
+    if (strncmp(buff,"CS=",3) == 0) {
+      sscanf(buff, "CS=%d", &(pin->cs));
+    } else if (strncmp(buff,"WR=",3) == 0) {
+      sscanf(buff, "WR=%d", &(pin->wr));
+    } else if (strncmp(buff,"RD=",3) == 0) {
+      sscanf(buff, "RD=%d", &(pin->rd));
+    } else if (strncmp(buff,"D0=",3) == 0) {
+      sscanf(buff, "D0=%d", &(pin->d0));
+    } else if (strncmp(buff,"D1=",3) == 0) {
+      sscanf(buff, "D1=%d", &(pin->d1));
+    } else if (strncmp(buff,"D2=",3) == 0) {
+      sscanf(buff, "D2=%d", &(pin->d2));
+    } else if (strncmp(buff,"D3=",3) == 0) {
+      sscanf(buff, "D3=%d", &(pin->d3));
+    } else if (strncmp(buff,"D4=",3) == 0) {
+      sscanf(buff, "D4=%d", &(pin->d4));
+    } else if (strncmp(buff,"D5=",3) == 0) {
+      sscanf(buff, "D5=%d", &(pin->d5));
+    } else if (strncmp(buff,"D6=",3) == 0) {
+      sscanf(buff, "D6=%d", &(pin->d6));
+    } else if (strncmp(buff,"D7=",3) == 0) {
+      sscanf(buff, "D7=%d", &(pin->d7));
+    }
+#endif
+
+  }
+  fclose(fp);
+  return 1;
+
 }
