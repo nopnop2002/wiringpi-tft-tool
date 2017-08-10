@@ -181,6 +181,8 @@ R0 : set angle 0
 R90 : set angle 0   
 R180 : set angle 0   
 R270 : set angle 0   
+M : show build model   
+P : show pin assignment   
 
 Start Demo :   
 chmod 777 test.sh   
