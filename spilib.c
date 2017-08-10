@@ -54,6 +54,7 @@ uint16_t _height;
 uint16_t RS;
 uint16_t RST;
 uint16_t CS;
+uint16_t CH;
 
 #ifdef WPI
 // SPI Write Command 8Bit
@@ -61,7 +62,7 @@ uint16_t CS;
 void lcdWriteCommandByte(uint8_t c){
 //  digitalWrite(CS,LOW);
   digitalWrite(RS,LOW);
-  wiringPiSPIDataRW(0, &c, 1);
+  wiringPiSPIDataRW(CH, &c, 1);
 //  digitalWrite(CS,HIGH);
 }
 
@@ -70,7 +71,7 @@ void lcdWriteCommandByte(uint8_t c){
 void lcdWriteDataByte(uint8_t c){
 //  digitalWrite(CS,LOW);
   digitalWrite(RS,HIGH);
-  wiringPiSPIDataRW(0, &c, 1);
+  wiringPiSPIDataRW(CH, &c, 1);
 //  digitalWrite(CS,HIGH);
 }
 #endif
@@ -113,13 +114,16 @@ void lcdInit(uint16_t width, uint16_t height, SPIPin pin) {
   _height = height;
   RST = pin.rst;
   RS  = pin.rs;
-  CS  = 8; // GPIO8
+  CH  = pin.ch;
+  CS  = pin.cs;
 
   if (wiringPiSetupGpio() == -1) {
     printf("wiringPiSetup Error\n");
     return;
   }
-  wiringPiSPISetup(0, 16000000);
+
+  wiringPiSPISetup(CH, 16000000);
+//  wiringPiSPISetup(0, 16000000);
 //  wiringPiSPISetup(0, 32000000);
 
   _FONT_DIRECTION_ = DIRECTION0;
@@ -149,6 +153,7 @@ void lcdInit(uint16_t width, uint16_t height, SPIPin pin) {
   _height = height;
   RST = pin.rst;
   RS  = pin.rs;
+  CH  = pin.ch;
 
   if (bcm2835_init() == -1) {
     printf("bmc2835_init Error\n");
@@ -159,8 +164,13 @@ void lcdInit(uint16_t width, uint16_t height, SPIPin pin) {
   bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST);
   bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);
   bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_8);
-  bcm2835_spi_chipSelect(BCM2835_SPI_CS0);
-  bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW);
+  if (CH == 0) {
+    bcm2835_spi_chipSelect(BCM2835_SPI_CS0);
+    bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW);
+  } else {
+    bcm2835_spi_chipSelect(BCM2835_SPI_CS1);
+    bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS1, LOW);
+  }
   // Send a byte to the slave and simultaneously read a byte back from the slave
   // If you tie MISO to MOSI, you should read back what was sent
 

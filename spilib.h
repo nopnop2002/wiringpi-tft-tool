@@ -4,6 +4,7 @@ typedef struct {
   uint8_t rst;
   uint8_t rs;
   uint8_t ch;
+  uint8_t cs;
 } SPIPin;
 
 #define RED             0xf800
