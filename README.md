@@ -52,6 +52,11 @@ Wirering for SPI TFT
 \**You can choose CE0 or CE1.   
 Pin define is "spi.conf".   
 
+Note:   
+Opi have only 1 SPI.   
+OPi-PC have CE0 and GPIO8.   
+OPi ZERO have CE1 and GPIO8.   
+
 ----
 
 Wirering for 8bit Parallel TFT   
@@ -71,12 +76,12 @@ Wirering for 8bit Parallel TFT
 |LCD_D5|--|Pin#32|
 |LCD_D6|--|Pin#36|
 |LCD_D7|--|Pin#38|
-|5V|--|5V(**)|
-|3.3V|--|3.3V(**)|
+|5V|--|5V(*)|
+|3.3V|--|3.3V(*)|
 |GND|--|GND|
 
-**When a regulator(It's often AMS1117) is mounted on the back, it's operated 5V.   
-**When a regulator is NOT mounted on the back, it's operated 3.3V.   
+\*When a regulator(It's often AMS1117) is mounted on the back, it's operated 5V.   
+\*When a regulator is NOT mounted on the back, it's operated 3.3V.   
 
 You can change any pin.   
 Pin define is "pin.conf".   
