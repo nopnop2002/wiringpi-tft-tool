@@ -42,14 +42,15 @@ Wirering for SPI TFT
 |LED|--|3.3V|
 |SCK|--|Pin#23(SPI SCLK)|
 |MOSI|--|Pin#19(SPI MOSI)|
-|RS|--|Pin#3(\*)|
-|RST|--|Pin#5(\*)|
-|CS|--|Pin#24(SPI CE0)|
+|RS|--|Pin#3(*)|
+|RST|--|Pin#5(*)|
+|CS|--|Pin#24(SPI CE0)(**)|
 |GND|--|GND|
 |VCC|--|3.3V|
 
 \*You can change any pin.   
-\*Pin define is "spi.conf".   
+\**You can choose CE0 or CE1.   
+Pin define is "spi.conf".   
 
 ----
 
