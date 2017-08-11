@@ -15,6 +15,7 @@ SPI 240x320 ILI9341
 
 8bit Parallel 240x320 S6D1121   
 8bit Parallel 240x320 ILI9325   
+8bit Parallel 240x400 ILI9327   
 8bit Parallel 240x320 ILI9341   
 8bit Parallel 240x320 ILI9342   
 8bit Parallel 320x480 ILI9481   
@@ -31,6 +32,14 @@ Left to Right
 ![spi-tft-display-2](https://user-images.githubusercontent.com/6020549/28999997-cdfd9aee-7a97-11e7-9eaf-51db1f0d74ac.JPG)
 
 ![spi-tft-display-3](https://user-images.githubusercontent.com/6020549/29000000-e99b0b74-7a97-11e7-9856-6ae5dc255c0b.JPG)
+
+From Left Top to Right Buttom.   
+2.4 inch 8Bit Parallel 240x320 ILI9341   
+3.5 inch 8Bit Parallel 320x480 ILI9181   
+2.4 inch 8Bit Parallel 240x320 ILI9325   
+3.6 inch 8Bit Parallel 240x400 ILI9327   
+
+![8bit-tft-1](https://user-images.githubusercontent.com/6020549/29200753-d60c3d90-7e92-11e7-8888-73a2d4bda61e.JPG)
 
 ----
 
@@ -117,6 +126,14 @@ Build for 8bit Parallel ILI9325 TFT (using WiringPi/WiringOp library, Both of RP
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9325   
+
+----
+
+Build for 8bit Parallel ILI9327 TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
+
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9327   
 
 ----
 
