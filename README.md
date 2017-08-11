@@ -33,6 +33,8 @@ Left to Right
 
 ![spi-tft-display-3](https://user-images.githubusercontent.com/6020549/29000000-e99b0b74-7a97-11e7-9856-6ae5dc255c0b.JPG)
 
+----
+
 From Left Top to Right Buttom.   
 2.4 inch 8Bit Parallel 240x320 ILI9341   
 3.5 inch 8Bit Parallel 320x480 ILI9181   
