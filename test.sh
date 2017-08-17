@@ -1,8 +1,8 @@
 ./tft r
-./tft +1 日本語
-./tft +2 ｶﾀﾅｶ
-./tft +3 ABCDEFG
-./tft +4 1234567
+./tft +1 ABCDEFG
+./tft +2 abcdefg
+./tft +3 1234567
+./tft +4 7654321
 sudo ./tft s
 echo -n "push Enter"
 read input
