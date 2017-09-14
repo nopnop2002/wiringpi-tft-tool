@@ -391,6 +391,10 @@ if(_DEBUG_)printf("fnameh=%s\nfnamez=%s\n",fnameh,fnamez);
     lcdInit(0x1121, XMAX, YMAX, pins);
 #endif
 
+#ifdef R61505U
+    lcdInit(0x1505, XMAX, YMAX, pins);
+#endif
+
 #ifdef R61509V
     lcdInit(0xB509, XMAX, YMAX, pins);
 #endif
@@ -473,6 +477,10 @@ if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
 
 #ifdef S6D1121
     printf("S6D1121");
+#endif
+
+#ifdef R61505U
+    printf("R61505U");
 #endif
 
 #ifdef R61509V
