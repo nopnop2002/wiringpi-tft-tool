@@ -387,6 +387,10 @@ if(_DEBUG_)printf("fnameh=%s\nfnamez=%s\n",fnameh,fnamez);
     lcdInit(0x9481, XMAX, YMAX, pins);
 #endif
 
+#ifdef SPFD5408
+    lcdInit(0x5408, XMAX, YMAX, pins);
+#endif
+
 #ifdef S6D1121
     lcdInit(0x1121, XMAX, YMAX, pins);
 #endif
@@ -473,6 +477,10 @@ if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
 
 #ifdef ILI9481
     printf("ILI9481");
+#endif
+
+#ifdef SPFD5408
+    printf("SPFD5408");
 #endif
 
 #ifdef S6D1121

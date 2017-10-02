@@ -13,13 +13,14 @@ SPI 128x160 ST7735
 SPI 240x320 ILI9340   
 SPI 240x320 ILI9341   
 
-8bit Parallel 240x320 S6D1121   
 8bit Parallel 240x320 ILI9325   
 8bit Parallel 240x400 ILI9327   
 8bit Parallel 240x320 ILI9341   
 8bit Parallel 240x320 ILI9342   
 8bit Parallel 320x480 ILI9481   
-8bit Parallel 240x320 R61505U   
+8bit Parallel 240x320 SPFD5408(Same as ILI9325)   
+8bit Parallel 240x320 S6D1121   
+8bit Parallel 240x320 R61505U (Same as ILI9325)   
 8bit Parallel 240x400 R61509V   
 
 ----
@@ -162,6 +163,14 @@ Build for 8bit Parallel ILI9481 TFT (using WiringPi/WiringOp library, Both of RP
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481   
+
+----
+
+Build for 8bit Parallel SPFD5408 TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
+
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DSPFD5408   
 
 ----
 
