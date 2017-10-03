@@ -1,5 +1,6 @@
 /*
  ILI9325 : 16Bit Instruction
+ ILI9327 :  8Bit Instruction
  ILI9341 :  8Bit Instruction
  ILI9342 :  8Bit Instruction
  ILI9481 :  8Bit Instruction
@@ -259,6 +260,80 @@ void lcdSetup(void) {
    lcdWriteRegisterWord(0x0007,0x0021);
    lcdWriteRegisterWord(0x0007,0x0031);
    lcdWriteRegisterWord(0x0007,0x0173);
+
+  } else if (_model == 0x9327) {
+   lcdWriteCommandByte( 0x11 );	//Exit Sleep
+   delay(100);
+   lcdWriteCommandByte( 0xD1 );	//VCOM Control
+   lcdWriteDataByte( 0x00 );	//SEL/VCM
+   lcdWriteDataByte( 0x0C );	//VCM
+   lcdWriteDataByte( 0x0F );	//VDV
+   lcdWriteCommandByte( 0xD0 );	//Power_Setting
+   lcdWriteDataByte( 0x07 );//VC
+   lcdWriteDataByte( 0x04 );//BT
+   lcdWriteDataByte( 0x00 );//VRH
+
+   lcdWriteCommandByte( 0x36 );	//Set_addLCD_RESs_mode
+//  lcdWriteDataByte( 0x48 );
+   lcdWriteDataByte( 0x08 );
+// 0x48 = 0b01001000
+// 0 - top to bottom
+// 0 - left to right
+// 0 - normal mode of columns order
+// 0 - refLCD_RESh top to bottom
+// 1 - RGB or BGR  (here BGR order)
+// 0 - <skip>
+// 0 - no hflip
+// 0 - no flip
+ 
+   lcdWriteCommandByte( 0x3A );//Set pixel format
+   lcdWriteDataByte( 0x05 );
+   lcdWriteCommandByte( 0xC1 );//Display timing setting for normal/partial mode
+   lcdWriteDataByte( 0x10 );
+   lcdWriteDataByte( 0x10 );
+   lcdWriteDataByte( 0x02 );
+   lcdWriteDataByte( 0x02 );
+   lcdWriteCommandByte( 0xC0 );//Set Default Gamma
+   lcdWriteDataByte( 0x00 );
+   lcdWriteDataByte( 0x35 );
+   lcdWriteDataByte( 0x00 );
+   lcdWriteDataByte( 0x00 );
+   lcdWriteDataByte( 0x01 );
+   lcdWriteDataByte( 0x02 );
+   lcdWriteCommandByte( 0xC5 );//Set frame rate
+   lcdWriteDataByte( 0x04 );
+   lcdWriteCommandByte( 0xD2 );//Power setting
+   lcdWriteDataByte( 0x01 );
+   lcdWriteDataByte( 0x44 );
+   lcdWriteCommandByte( 0xC8 );//Set Gamma
+   lcdWriteDataByte( 0x04 );
+   lcdWriteDataByte( 0x67 );
+   lcdWriteDataByte( 0x35 );
+   lcdWriteDataByte( 0x04 );
+   lcdWriteDataByte( 0x08 );
+   lcdWriteDataByte( 0x06 );
+   lcdWriteDataByte( 0x24 );
+   lcdWriteDataByte( 0x01 );
+   lcdWriteDataByte( 0x37 );
+   lcdWriteDataByte( 0x40 );
+   lcdWriteDataByte( 0x03 );
+   lcdWriteDataByte( 0x10 );
+   lcdWriteDataByte( 0x08 );
+   lcdWriteDataByte( 0x80 );
+   lcdWriteDataByte( 0x00 );
+   lcdWriteCommandByte( 0x2A );
+   lcdWriteDataByte( 0x00 );
+   lcdWriteDataByte( 0x00 );
+   lcdWriteDataByte( 0x00 );
+   lcdWriteDataByte( 0xeF );
+   lcdWriteCommandByte( 0x2B );
+   lcdWriteDataByte( 0x00 );
+   lcdWriteDataByte( 0x00 );
+   lcdWriteDataByte( 0x01 );
+   lcdWriteDataByte( 0x8F );
+   lcdWriteCommandByte( 0x29 );//display on
+   lcdWriteCommandByte( 0x2C );//memory write
+
 
   } else if (_model == 0x9341) {
    lcdWriteCommandByte(0xC0);    //Power control 
@@ -564,6 +639,20 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
     lcdWriteRegisterWord(0x0020,x); // RAM Address Set 1
     lcdWriteRegisterWord(0x0021,y); // RAM Address Set 2
     lcdWriteRegisterWord(0x0022,color); // Write Data to GRAM
+  } else if (_model == 0x9327) {
+    lcdWriteCommandByte(0x2a);//Set_column_addLCD_RESs
+    lcdWriteDataByte(x>>8);
+    lcdWriteDataByte(x);
+    lcdWriteDataByte(x>>8);
+    lcdWriteDataByte(x);
+    lcdWriteCommandByte(0x2b);//Set_page_addLCD_RESs
+    lcdWriteDataByte(y>>8);
+    lcdWriteDataByte(y);
+    lcdWriteDataByte(y>>8);
+    lcdWriteDataByte(y);
+    lcdWriteCommandByte(0x2c);//Write_memory_start
+    lcdWriteDataByte(color>>8);
+    lcdWriteDataByte(color&0xff);
   } else if (_model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
     lcdWriteCommandByte(0x2A); // set column(x) address
     lcdWriteDataWord(x);
@@ -609,6 +698,24 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
         lcdWriteRegisterWord(0x0022,color); // RAM Address Set 2
       }
     }
+  } else if (_model == 0x9327) {
+    lcdWriteCommandByte(0x2a);//Set_column_addLCD_RESs
+    lcdWriteDataByte(x1>>8);
+    lcdWriteDataByte(x1);
+    lcdWriteDataByte(x2>>8);
+    lcdWriteDataByte(x2);
+    lcdWriteCommandByte(0x2b);//Set_page_addLCD_RESs
+    lcdWriteDataByte(y1>>8);
+    lcdWriteDataByte(y1);
+    lcdWriteDataByte(y2>>8);
+    lcdWriteDataByte(y2);
+    lcdWriteCommandByte(0x2c);//Write_memory_start
+    for(i=x1;i<x2+1;i++) {
+      for(j=y1;j<y2+1;j++) {
+        lcdWriteDataByte(color>>8);
+        lcdWriteDataByte(color&0xff);
+      }
+    }
   } else if (_model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
     lcdWriteCommandByte(0x2A); // set column(x) address
     lcdWriteDataWord(x1);
@@ -646,7 +753,7 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
 void lcdDisplayOff(void) {
   if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505) {
     lcdWriteRegisterWord(0x0007, 0x0000); // Set GON=0 DTE=0 D1=0, D0=0
-  } else if (_model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
+  } else if (_model == 0x9327 || _model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
     lcdWriteCommandByte(0x28); 
   } else if (_model == 0x1121) {
     lcdWriteRegisterWord(0x0007, 0x0010); // Set GON=0 D1=0, D0=0
@@ -659,7 +766,7 @@ void lcdDisplayOff(void) {
 void lcdDisplayOn(void) {
   if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505) {
     lcdWriteRegisterWord(0x0007, 0x0173); // Set GON=1 DTE=1 D1=1, D0=1
-  } else if (_model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
+  } else if (_model == 0x9327 || _model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
     lcdWriteCommandByte(0x29); 
   } else if (_model == 0x1121) {
     lcdWriteRegisterWord(0x0007, 0x0053); // Set GON=1 D1=1, D0=1

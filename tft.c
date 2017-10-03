@@ -375,6 +375,10 @@ if(_DEBUG_)printf("fnameh=%s\nfnamez=%s\n",fnameh,fnamez);
     lcdInit(0x9325, XMAX, YMAX, pins);
 #endif
 
+#ifdef ILI9327
+    lcdInit(0x9327, XMAX, YMAX, pins);
+#endif
+
 #ifdef ILI9341
     lcdInit(0x9341, XMAX, YMAX, pins);
 #endif
@@ -465,6 +469,10 @@ if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
 
 #ifdef ILI9325
     printf("ILI9325");
+#endif
+
+#ifdef ILI9327
+    printf("ILI9327");
 #endif
 
 #ifdef ILI9341
