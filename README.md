@@ -142,7 +142,8 @@ cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9327
 
 ----
 
-# Build for 8bit Parallel ILI9341 TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
+# Build for 8bit Parallel ILI9341 TFT   
+using WiringPi/WiringOp library, Both of RPi/OPi   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -150,7 +151,8 @@ cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9341
 
 ----
 
-# Build for 8bit Parallel ILI9342 TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
+# Build for 8bit Parallel ILI9342 TFT   
+using WiringPi/WiringOp library, Both of RPi/OPi   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -158,7 +160,8 @@ cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9342
 
 ----
 
-# Build for 8bit Parallel ILI9481 TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
+# Build for 8bit Parallel ILI9481 TFT   
+using WiringPi/WiringOp library, Both of RPi/OPi   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -166,7 +169,8 @@ cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481
 
 ----
 
-# Build for 8bit Parallel SPFD5408 TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
+# Build for 8bit Parallel SPFD5408 TFT   
+using WiringPi/WiringOp library, Both of RPi/OPi   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -174,7 +178,8 @@ cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DSPFD5408
 
 ----
 
-# Build for 8bit Parallel S6D1121 TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
+# Build for 8bit Parallel S6D1121 TFT   
+using WiringPi/WiringOp library, Both of RPi/OPi   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -182,7 +187,8 @@ cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DS6D1121
 
 ----
 
-# Build for 8bit Parallel R61505U TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
+# Build for 8bit Parallel R61505U TFT   
+(using WiringPi/WiringOp library, Both of RPi/OPi)   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
@@ -190,7 +196,8 @@ cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DR61505U
 
 ----
 
-# Build for 8bit Parallel R61509V TFT (using WiringPi/WiringOp library, Both of RPi/OPi)   
+# Build for 8bit Parallel R61509V TFT   
+(using WiringPi/WiringOp library, Both of RPi/OPi)   
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
