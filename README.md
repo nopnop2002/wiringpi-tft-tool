@@ -48,7 +48,7 @@ From Left Top to Right Buttom.
 
 ----
 
-Wirering for SPI TFT   
+# Wirering for SPI TFT   
 
 |TFT||Rpi/OPI|
 |:-:|:-:|:-:|
@@ -73,7 +73,7 @@ OPi ZERO have CE1 and GPIO8.
 
 ----
 
-Wirering for 8bit Parallel TFT   
+# Wirering for 8bit Parallel TFT   
 
 |TFT||Rpi/Opi|
 |:-:|:-:|:-:|
