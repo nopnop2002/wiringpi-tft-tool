@@ -209,7 +209,12 @@ Set your pin assignment.
 If you use 8bit Parallel TFT, check "pin.conf".   
 Set your pin assignment.   
 
+----
+
 Command line parameters:   
+
+s : show display(must root or sudo)   
+r : remove all string
 +n String : String for #n line   
 -n : delete #n line   
 Fn : set fore ground color for #n line   

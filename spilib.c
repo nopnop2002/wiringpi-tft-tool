@@ -109,7 +109,7 @@ void lcdWriteDataWord(uint16_t w){
 #ifdef WPI
 // SPI interfase initialize
 // MSB,mode0,clock=8,cs0=low
-void lcdInit(uint16_t width, uint16_t height, SPIPin pin) {
+void lcdInit(uint16_t width, uint16_t height, TFTPin pin) {
   _width = width;
   _height = height;
   RST = pin.rst;
@@ -148,7 +148,7 @@ void lcdReset(void){
 #ifdef BCM
 // SPI interfase initialize
 // MSB,mode0,clock=8,cs0=low
-void lcdInit(uint16_t width, uint16_t height, SPIPin pin) {
+void lcdInit(uint16_t width, uint16_t height, TFTPin pin) {
   _width = width;
   _height = height;
   RST = pin.rst;

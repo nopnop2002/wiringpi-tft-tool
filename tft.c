@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdint.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <libgen.h>
@@ -84,7 +83,7 @@ if(_DEBUG_)  printf("ppath=%s\n",ppath);
 if(_DEBUG_)  printf("ReadTFTConfig:XMAX=%d YMAX=%d\n",XMAX,YMAX);
 
 #ifdef SPI
-  SPIPin pins;
+  TFTPin pins;
   pins.rst = 9;
   pins.rs  = 8;
   ReadPinConfig(&pins, spath);
@@ -369,7 +368,7 @@ if(_DEBUG_)printf("fnameh=%s\nfnamez=%s\n",fnameh,fnamez);
     Fontx_init(fx,fnameh,fnamez);
 
 #ifdef SPI
-    lcdInit(XMAX, YMAX);
+    lcdInit(XMAX, YMAX, pins);
 #endif
 
 #ifdef ILI9325
