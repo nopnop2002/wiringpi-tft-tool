@@ -369,42 +369,52 @@ if(_DEBUG_)printf("fnameh=%s\nfnamez=%s\n",fnameh,fnamez);
 
 #ifdef SPI
     lcdInit(XMAX, YMAX, pins);
+    #define MODEL "SPI"
 #endif
 
 #ifdef ILI9325
     lcdInit(0x9325, XMAX, YMAX, pins);
+    #define MODEL "ILI9325"
 #endif
 
 #ifdef ILI9327
     lcdInit(0x9327, XMAX, YMAX, pins);
+    #define MODEL "ILI9327"
 #endif
 
 #ifdef ILI9341
     lcdInit(0x9341, XMAX, YMAX, pins);
+    #define MODEL "ILI9341"
 #endif
 
 #ifdef ILI9342
     lcdInit(0x9342, XMAX, YMAX, pins);
+    #define MODEL "ILI9342"
 #endif
 
 #ifdef ILI9481
     lcdInit(0x9481, XMAX, YMAX, pins);
+    #define MODEL "ILI9481"
 #endif
 
 #ifdef SPFD5408
     lcdInit(0x5408, XMAX, YMAX, pins);
+    #define MODEL "SPFD5408"
 #endif
 
 #ifdef S6D1121
     lcdInit(0x1121, XMAX, YMAX, pins);
+    #define MODEL "S6D1121"
 #endif
 
 #ifdef R61505U
     lcdInit(0x1505, XMAX, YMAX, pins);
+    #define MODEL "R61505U"
 #endif
 
 #ifdef R61509V
     lcdInit(0xB509, XMAX, YMAX, pins);
+    #define MODEL "R61509V"
 #endif
 
     lcdReset();
@@ -463,46 +473,7 @@ if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
   }
 
   if (strcmp(argv[1],"M") == 0) {
-#ifdef SPI
-    printf("SPI");
-#endif
-
-#ifdef ILI9325
-    printf("ILI9325");
-#endif
-
-#ifdef ILI9327
-    printf("ILI9327");
-#endif
-
-#ifdef ILI9341
-    printf("ILI9341");
-#endif
-
-#ifdef ILI9342
-    printf("ILI9342");
-#endif
-
-#ifdef ILI9481
-    printf("ILI9481");
-#endif
-
-#ifdef SPFD5408
-    printf("SPFD5408");
-#endif
-
-#ifdef S6D1121
-    printf("S6D1121");
-#endif
-
-#ifdef R61505U
-    printf("R61505U");
-#endif
-
-#ifdef R61509V
-    printf("R61509V");
-#endif
-    printf("(%3dx%3d)\n",XMAX,YMAX);
+    printf("%s(%3dx%3d)\n",MODEL,XMAX,YMAX);
   }
 
   if (strcmp(argv[1],"P") == 0) {
