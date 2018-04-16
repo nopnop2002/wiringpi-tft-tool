@@ -21,7 +21,7 @@ ipaddr=`sudo ifconfig wlan0 |grep "inet addr" |awk {'print $2'} |cut -f2 -d:`
 ./tft +3 $ipaddr
 
 model=`./tft M`
-./tft +4 ${model}
+./tft +4 $model
 
 #raspberry pi
 #temp0=`vcgencmd measure_temp`
