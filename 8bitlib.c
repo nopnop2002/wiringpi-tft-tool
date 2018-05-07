@@ -475,21 +475,8 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
     lcdWriteRegisterWord(0x0020,x); // RAM Address Set 1
     lcdWriteRegisterWord(0x0021,y); // RAM Address Set 2
     lcdWriteRegisterWord(0x0022,color); // Write Data to GRAM
-  } else if (_model == 0x9327) {
-    lcdWriteCommandByte(0x2a);//Set_column_addLCD_RESs
-    lcdWriteDataByte(x>>8);
-    lcdWriteDataByte(x);
-    lcdWriteDataByte(x>>8);
-    lcdWriteDataByte(x);
-    lcdWriteCommandByte(0x2b);//Set_page_addLCD_RESs
-    lcdWriteDataByte(y>>8);
-    lcdWriteDataByte(y);
-    lcdWriteDataByte(y>>8);
-    lcdWriteDataByte(y);
-    lcdWriteCommandByte(0x2c);//Write_memory_start
-    lcdWriteDataByte(color>>8);
-    lcdWriteDataByte(color&0xff);
-  } else if (_model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
+
+  } else if (_model == 0x9327 || _model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
     lcdWriteCommandByte(0x2A); // set column(x) address
     lcdWriteDataWord(x);
     lcdWriteDataWord(x);
@@ -498,10 +485,12 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
     lcdWriteDataWord(y);
     lcdWriteCommandByte(0x2C); // Memory Write
     lcdWriteDataWord(color);
+
   } else if (_model == 0x1121) {
     lcdWriteRegisterWord(0x0020,x); // RAM Address Set 1
     lcdWriteRegisterWord(0x0021,y); // RAM Address Set 2
     lcdWriteRegisterWord(0x0022,color); // Write Data to GRAM
+
   } else if (_model == 0xB509) {
     lcdWriteRegisterWord(0x0200,x); // RAM Address Set 1
     lcdWriteRegisterWord(0x0201,y); // RAM Address Set 2
@@ -534,25 +523,8 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
         lcdWriteRegisterWord(0x0022,color); // RAM Address Set 2
       }
     }
-  } else if (_model == 0x9327) {
-    lcdWriteCommandByte(0x2a);//Set_column_addLCD_RESs
-    lcdWriteDataByte(x1>>8);
-    lcdWriteDataByte(x1);
-    lcdWriteDataByte(x2>>8);
-    lcdWriteDataByte(x2);
-    lcdWriteCommandByte(0x2b);//Set_page_addLCD_RESs
-    lcdWriteDataByte(y1>>8);
-    lcdWriteDataByte(y1);
-    lcdWriteDataByte(y2>>8);
-    lcdWriteDataByte(y2);
-    lcdWriteCommandByte(0x2c);//Write_memory_start
-    for(i=x1;i<x2+1;i++) {
-      for(j=y1;j<y2+1;j++) {
-        lcdWriteDataByte(color>>8);
-        lcdWriteDataByte(color&0xff);
-      }
-    }
-  } else if (_model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
+
+  } else if (_model == 0x9327 || _model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
     lcdWriteCommandByte(0x2A); // set column(x) address
     lcdWriteDataWord(x1);
     lcdWriteDataWord(x2);
@@ -565,6 +537,7 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
        lcdWriteDataWord(color);
       }
     }
+
   } else if (_model == 0x1121) {
     for(j=y1;j<=y2;j++){
       lcdWriteRegisterWord(0x0020,x1);
@@ -573,6 +546,7 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
         lcdWriteRegisterWord(0x0022,color);
       }
     }
+
   } else if (_model == 0xB509) {
     for(i=x1;i<=x2;i++){
       for(j=y1;j<=y2;j++){
