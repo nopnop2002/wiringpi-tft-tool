@@ -78,6 +78,7 @@ void lcdWriteDataByte(uint8_t data) {
   digitalWrite(LCD_CS, LOW);
   digitalWrite(LCD_RS, HIGH);
   digitalWrite(LCD_RD, HIGH);
+
   digitalWrite(LCD_WR, HIGH);
   lcdWriteByte(data);
   digitalWrite(LCD_WR, LOW);
@@ -110,12 +111,7 @@ void lcdWriteCommandByte(uint8_t command) {
   digitalWrite(LCD_CS, LOW);
   digitalWrite(LCD_RS, LOW);
   digitalWrite(LCD_RD, HIGH);
-#if 0
-  digitalWrite(LCD_WR, HIGH);  
-  lcdWriteByte(command >> 8);
-  digitalWrite(LCD_WR, LOW);
-  delayMicroseconds(10);
-#endif
+
   digitalWrite(LCD_WR, HIGH);
   lcdWriteByte(command);
   digitalWrite(LCD_WR, LOW);
