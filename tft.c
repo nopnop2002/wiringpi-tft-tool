@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
 #include <libgen.h>
 #include <sys/stat.h>
 #ifdef SPI

@@ -1,19 +1,19 @@
 #include "fontx.h"
 
 typedef struct {
-  uint8_t rst;
-  uint8_t cs;
-  uint8_t rs;
-  uint8_t wr;
-  uint8_t rd;
-  uint8_t d0;
-  uint8_t d1;
-  uint8_t d2;
-  uint8_t d3;
-  uint8_t d4;
-  uint8_t d5;
-  uint8_t d6;
-  uint8_t d7;
+  int rst;
+  int cs;
+  int rs;
+  int wr;
+  int rd;
+  int d0;
+  int d1;
+  int d2;
+  int d3;
+  int d4;
+  int d5;
+  int d6;
+  int d7;
 } TFTPin;
 
 #define RED             0xf800

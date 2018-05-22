@@ -115,7 +115,7 @@ sudo make install
 cd $HOME   
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c spilib.c -lbcm2835 -lm -DSPI -DBCM   
+cc -o tft tft.c fontx.c spilib.c -lbcm2835 -lm -lpthread -DSPI -DBCM   
 
 ----
 
@@ -124,7 +124,7 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c spilib.c -lwiringPi -lm -DSPI -DWPI
+cc -o tft tft.c fontx.c spilib.c -lwiringPi -lm -lpthread -DSPI -DWPI
 
 ----
 
@@ -133,7 +133,7 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9325   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9325   
 
 ----
 
@@ -142,7 +142,7 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9327   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9327   
 
 ----
 
@@ -151,7 +151,7 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9341   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9341   
 
 ----
 
@@ -160,7 +160,7 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9342   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9342   
 
 ----
 
@@ -169,7 +169,7 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DILI9481   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9481   
 
 ----
 
@@ -178,7 +178,7 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DSPFD5408   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DSPFD5408   
 
 ----
 
@@ -187,7 +187,7 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DS6D1121   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DS6D1121   
 
 ----
 
@@ -196,7 +196,7 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DR61505U   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DR61505U   
 
 ----
 
@@ -205,7 +205,7 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -DR61509V   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DR61509V   
 
 ----
 

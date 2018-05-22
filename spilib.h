@@ -1,10 +1,10 @@
 #include "fontx.h"
 
 typedef struct {
-  uint8_t rst;
-  uint8_t rs;
-  uint8_t ch;
-  uint8_t cs;
+  int rst;
+  int rs;
+  int ch;
+  int cs;
 } TFTPin;
 
 #define RED             0xf800
