@@ -45,7 +45,7 @@ int ReadTFTConfig(char *path, int *width, int *height);
 int ReadPinConfig(TFTPin *pins, char *path);
 
 int main(int argc, char **argv){
-  int i,j,k;
+  int i;
   int XMAX,YMAX;
   char dir[128];
   char cpath[128];
@@ -147,7 +147,7 @@ if(_DEBUG_)DumpSaveFrame(sv);
     num = (numc[1] - '0') - 1;
       
 if(_DEBUG_)printf("add string to line [%d]\n",num);
-    sv.save[num].size = String2SJIS(argv[2], strlen(argv[2]), sv.save[num].sjis, MAXCHAR);
+    sv.save[num].size = String2SJIS((unsigned char*)argv[2], strlen(argv[2]), sv.save[num].sjis, MAXCHAR);
 if(_DEBUG_)DumpSaveFrame(sv);
     fp = fopen(dpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);
@@ -499,7 +499,7 @@ if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
     printf("D7 =%d\n",pins.d7);
 #endif
   }
-
+  return 0;
 }
 
 
@@ -579,7 +579,6 @@ int ReadTFTConfig(char *path, int *width, int *height) {
 int ReadPinConfig(TFTPin *pin, char *path) {
   FILE *fp;
   char buff[128];
-  int wk;
   
 //  printf("path=%s\n",path);
   fp = fopen(path,"r");
