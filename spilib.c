@@ -81,18 +81,16 @@ void lcdWriteDataByte(uint8_t c){
 // SPI Write Command
 // D/C=LOW then,write command(8bit)
 void lcdWriteCommandByte(uint8_t c){
-  int data;
   bcm2835_gpio_write(RS,LOW);
-  data = bcm2835_spi_transfer(c);
+  bcm2835_spi_transfer(c);
   bcm2835_gpio_write(RS,HIGH);
 }
 
 // SPI Write Data 8Bit
 // D/C=HIGH then,write data(8bit)
 void lcdWriteDataByte(uint8_t c){
-  int data;
   bcm2835_gpio_write(RS,HIGH);
-  data = bcm2835_spi_transfer(c);
+  bcm2835_spi_transfer(c);
 }
 #endif
 
@@ -726,6 +724,7 @@ if(_DEBUG_)printf("sjis[%d]=%x y=%d\n",i,sjis[i],y);
   if (_FONT_DIRECTION_ == 2) return x;
   if (_FONT_DIRECTION_ == 1) return y;
   if (_FONT_DIRECTION_ == 3) return y;
+  return 0;
 }
 
 // Set font direction
