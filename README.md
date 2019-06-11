@@ -22,6 +22,7 @@ SPI 240x320 ILI9341
 8bit Parallel 240x320 S6D1121   
 8bit Parallel 240x320 R61505U (Same as ILI9325)   
 8bit Parallel 240x400 R61509V   
+8bit Parallel 240x400 ST7781  (Same as ILI9325)   
 
 ----
 
@@ -227,6 +228,17 @@ using WiringPi/WiringOp library, Both of RPi/OPi
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
 cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DR61509V   
+```
+
+----
+
+# Build for 8bit Parallel ST7781 TFT   
+using WiringPi/WiringOp library, Both of RPi/OPi   
+
+```
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DST7781   
 ```
 
 ----

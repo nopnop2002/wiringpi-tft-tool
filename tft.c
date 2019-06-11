@@ -418,6 +418,12 @@ if(_DEBUG_)printf("fnameh=%s\nfnamez=%s\n",fnameh,fnamez);
     #define MODEL "R61509V"
 #endif
 
+#ifdef ST7781
+    lcdInit(0x7781, XMAX, YMAX, pins);
+    #define MODEL "ST7781"
+#endif
+
+
     lcdReset();
     lcdSetup();
     lcdFillScreen(sv.basecolor);
