@@ -18,11 +18,11 @@ SPI 240x320 ILI9341
 8bit Parallel 240x320 ILI9341   
 8bit Parallel 240x320 ILI9342   
 8bit Parallel 320x480 ILI9481   
-8bit Parallel 240x320 SPFD5408(Same as ILI9325)   
+8bit Parallel 240x320 SPFD5408   
 8bit Parallel 240x320 S6D1121   
-8bit Parallel 240x320 R61505U(Same as ILI9325)   
+8bit Parallel 240x320 R61505U   
 8bit Parallel 240x400 R61509V   
-8bit Parallel 240x320 ST7781(Same as ILI9325)   
+8bit Parallel 240x320 ST7781   
 
 ----
 
