@@ -16,22 +16,28 @@ set -- $PRETTY_NAME
 #. /etc/armbian-release
 #./tft +2 "Armbian "$VERSION
 
-#ipaddr=`sudo ifconfig eth0 |grep "inet addr" |awk {'print $2'} |cut -f2 -d:`
-ipaddr=`sudo ifconfig wlan0 |grep "inet addr" |awk {'print $2'} |cut -f2 -d:`
+ipaddr=`sudo ifconfig eth0 |grep "inet" |awk {'print $2'} |cut -f2 -d:`
+if [ -z ${ipaddr} ]; then
+  ipaddr=`sudo ifconfig wlan0 |grep "inet" |awk {'print $2'} |cut -f2 -d:`
+fi
+if [ -z ${ipaddr} ]; then
+  ipaddr=`sudo ifconfig wlan1 |grep "inet" |awk {'print $2'} |cut -f2 -d:`
+fi
 ./tft +3 $ipaddr
 
 model=`./tft M`
 ./tft +4 $model
 
 #raspberry pi
-#temp0=`vcgencmd measure_temp`
+temp0=`vcgencmd measure_temp`
+./tft +5 $temp0
 
 #orange pi
-temp0=`cat /sys/devices/virtual/thermal/thermal_zone0/temp`
-./tft +5 "thermal_zone0="$temp0
+#temp0=`cat /sys/devices/virtual/thermal/thermal_zone0/temp`
+#./tft +5 "thermal_zone0="$temp0
 
-temp1=`cat /sys/devices/virtual/thermal/thermal_zone1/temp`
-./tft +6 "thermal_zone1="$temp1
+#temp1=`cat /sys/devices/virtual/thermal/thermal_zone1/temp`
+#./tft +6 "thermal_zone1="$temp1
 
 ./tft B0 BLACK
 ./tft F1 CYAN
