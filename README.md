@@ -27,7 +27,7 @@ SPI 240x320 ILI9341
 
 Left to Right   
 2.2 inch SPI 240x320 ILI9340   
-1.44 inch SPI 128x128 ILI9163C   
+1.44 inch SPI 128x128 ST7735   
 1.8 inch SPI 128x160 ST7735   
 
 ![spi-tft-display-1](https://user-images.githubusercontent.com/6020549/28999994-c71fa140-7a97-11e7-858e-3110e922b466.JPG)
