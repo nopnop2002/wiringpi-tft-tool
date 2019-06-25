@@ -487,6 +487,8 @@ if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
 #ifdef SPI
     printf("RST=%d\n",pins.rst);
     printf("RS =%d\n",pins.rs);
+    printf("CS =%d\n",pins.cs);
+    printf("CH =%d\n",pins.ch);
 #endif
 
 #ifndef SPI
