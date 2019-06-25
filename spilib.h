@@ -25,6 +25,7 @@ typedef struct {
 void lcdWriteCommandByte(uint8_t c);
 void lcdWriteDataByte(uint8_t c);
 void lcdWriteDataWord(uint16_t w);
+void lcdWriteColor(uint16_t color, uint16_t size);
 void lcdInit(uint16_t width, uint16_t height, TFTPin pin);
 void lcdReset(void);
 void lcdSetup(void);

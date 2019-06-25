@@ -598,12 +598,14 @@ int ReadPinConfig(TFTPin *pin, char *path) {
       sscanf(buff, "RST=%d", &(pin->rst));
     } else if (strncmp(buff,"RS=",3) == 0) {
       sscanf(buff, "RS=%d", &(pin->rs));
+    } else if (strncmp(buff,"CS=",3) == 0) {
+      sscanf(buff, "CS=%d", &(pin->cs));
+    } else if (strncmp(buff,"CH=",3) == 0) {
+      sscanf(buff, "CH=%d", &(pin->ch));
     }
 
 #ifndef SPI
-    if (strncmp(buff,"CS=",3) == 0) {
-      sscanf(buff, "CS=%d", &(pin->cs));
-    } else if (strncmp(buff,"WR=",3) == 0) {
+    if (strncmp(buff,"WR=",3) == 0) {
       sscanf(buff, "WR=%d", &(pin->wr));
     } else if (strncmp(buff,"RD=",3) == 0) {
       sscanf(buff, "RD=%d", &(pin->rd));

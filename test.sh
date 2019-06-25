@@ -38,3 +38,21 @@ read input
 sudo ./tft s
 echo -n "push Enter"
 read input
+
+./tft B1 CYAN
+./tft B2 CYAN
+./tft B3 CYAN
+./tft B4 CYAN
+./tft F1 BLUE
+./tft F2 RED
+./tft F3 BLACK
+./tft F4 GRAY
+./tft R0
+sudo ./tft s
+read input
+
+./tft R180
+sudo ./tft s
+echo -n "push Enter"
+read input
+
