@@ -800,7 +800,7 @@ void lcdSetFontUnderLine(uint16_t color) {
   _FONT_UNDER_LINE_COLOR_ = color;
 }
 
-// UnSet font filling
+// UnSet font underline
 void lcdUnsetFontUnderLine(void) {
   _FONT_UNDER_LINE_ = false;
 }
