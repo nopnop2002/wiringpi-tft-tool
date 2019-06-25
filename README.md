@@ -8,7 +8,6 @@ You can choose BCM2835 library/WiringPi(WiringOp) library.
 I tested these TFT.   
 
 SPI 128x128 ST7735   
-SPI 128x128 ILI9163C   
 SPI 128x160 ST7735   
 SPI 240x320 ILI9340   
 SPI 240x320 ILI9341   
