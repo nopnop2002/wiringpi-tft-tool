@@ -61,14 +61,18 @@ uint16_t CH;
 // D/C=LOW then,write command(8bit)
 void lcdWriteCommandByte(uint8_t c){
   digitalWrite(RS, LOW);
+  digitalWrite(CS, LOW);
   wiringPiSPIDataRW(CH, &c, 1);
+  digitalWrite(CS, HIGH);
 }
 
 // Write Data 8Bit
 // D/C=HIGH then,write data(8bit)
 void lcdWriteDataByte(uint8_t c){
   digitalWrite(RS, HIGH);
+  digitalWrite(CS, LOW);
   wiringPiSPIDataRW(CH, &c, 1);
+  digitalWrite(CS, HIGH);
 }
 
 // Write Data 16Bit
@@ -90,7 +94,9 @@ void lcdWriteColor(uint16_t color, uint16_t size) {
     byte[index++] = color & 0xFF;
   }
   digitalWrite(RS, HIGH);
+  digitalWrite(CS, LOW);
   wiringPiSPIDataRW(0, byte, size*2);
+  digitalWrite(CS, HIGH);
 }
 #endif
 
@@ -156,7 +162,8 @@ void lcdReset(void){
   pinMode(RST,OUTPUT);
   pinMode(CS, OUTPUT);
   digitalWrite(RS, HIGH);
-  digitalWrite(CS, LOW);
+  //digitalWrite(CS, LOW);
+  digitalWrite(CS, HIGH);
 
   digitalWrite(RST, LOW);
   delay(100);
