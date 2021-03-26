@@ -300,10 +300,9 @@ Changing this file will change the font.
 
 You can add your original fonts.   
 The format of the font file is the FONTX format.   
-Your font file is put in fontx directory.   
-
 Please refer [this](http://elm-chan.org/docs/dosv/fontx_e.html) page about FONTX format.   
 
+Your font file is put in fontx directory.   
 ```
 if (sv.fontsize == 16) {
   strcat(fnameh,"fontx/16dot_your_font_file.FNT");
