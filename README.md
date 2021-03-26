@@ -292,9 +292,9 @@ This tool uses the following as default fonts:
 - fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric
 - fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric
 - fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric
-- fontx/ILGZ16XB.FNT // 16x16Dot Japanese ShiftJIS
-- fontx/ILGZ24XB.FNT // 24x24Dot Japanese ShiftJIS
-- fontx/ILGZ32XB.FNT // 32x32Dot Japanese ShiftJIS
+- fontx/ILGZ16XB.FNT // 16x16Dot Japanese ShiftJIS(Not unicode)
+- fontx/ILGZ24XB.FNT // 24x24Dot Japanese ShiftJIS(Not unicode)
+- fontx/ILGZ32XB.FNT // 32x32Dot Japanese ShiftJIS(Not unicode)
 
 Changing this file will change the font.
 
