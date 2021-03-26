@@ -322,5 +322,6 @@ if (sv.fontsize == 16) {
 [There](http://elm-chan.org/fsw/fontxedit.zip) is a font file editor.   
 This can be work on Windows 10.   
 You can download FONTX Editor fron [here](http://elm-chan.org/fsw_e.html).   
+[FONTX Editor](http://elm-chan.org/fsw/fontxedit.zip)
 ![FontxEditor](https://user-images.githubusercontent.com/6020549/78731275-3b889800-797a-11ea-81ba-096dbf07c4b8.png)
 
