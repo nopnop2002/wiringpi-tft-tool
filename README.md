@@ -321,16 +321,16 @@ if (sv.fontsize == 16) {
 
 # Font File Editor(FONTX Editor)   
 [There](http://elm-chan.org/fsw/fontxedit.zip) is a font file editor.   
-This can be done on Windows 10.   
+This can be work on Windows 10.   
 Developer page is [here](http://elm-chan.org/fsw_e.html).   
 
 ![FontxEditor](https://user-images.githubusercontent.com/6020549/78731275-3b889800-797a-11ea-81ba-096dbf07c4b8.png)
 
 ----
 
-OrangePi   
+- OrangePi   
 ![tft-opi](https://user-images.githubusercontent.com/6020549/29032790-c4407f94-7bcd-11e7-92f4-1c7e40978386.jpg)
 
-RaspberryPi   
+- RaspberryPi   
 ![tft-rpi](https://user-images.githubusercontent.com/6020549/29032792-c9fb2b32-7bcd-11e7-92e6-721f2ce276fa.jpg)
 
