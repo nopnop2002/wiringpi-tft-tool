@@ -285,6 +285,47 @@ P : show pin assignment
 chmod 777 test.sh   
 ./test.sh   
 
+---
+
+# Font File   
+This tool uses the following as default fonts:   
+- fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric
+- fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric
+- fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric
+- fontx/ILGZ16XB.FNT // 16x16Dot Japanese
+- fontx/ILGZ24XB.FNT // 24x24Dot Japanese
+- fontx/ILGZ32XB.FNT // 32x32Dot Japanese
+
+Changing this file will change the font.
+
+You can add your original fonts.   
+The format of the font file is the FONTX format.   
+Your font file is put in fontx directory.   
+
+Please refer [this](http://elm-chan.org/docs/dosv/fontx_e.html) page about FONTX format.   
+
+```
+if (sv.fontsize == 16) {
+  strcat(fnameh,"fontx/16dot_your_font_file.FNT");
+  strcat(fnamez,"fontx/ILGZ16XB.FNT");
+} else if (sv.fontsize == 24) {
+  strcat(fnameh,"fontx/24dot_your_font_file.FNT");
+  strcat(fnamez,"fontx/ILGZ24XB.FNT");
+} else if (sv.fontsize == 32) {
+  strcat(fnameh,"fontx/32dot_your_font_file.FNT");
+  strcat(fnamez,"fontx/ILGZ32XB.FNT");
+}
+```
+
+---
+
+# Font File Editor(FONTX Editor)   
+[There](http://elm-chan.org/fsw/fontxedit.zip) is a font file editor.   
+This can be done on Windows 10.   
+Developer page is [here](http://elm-chan.org/fsw_e.html).   
+
+![FontxEditor](https://user-images.githubusercontent.com/6020549/78731275-3b889800-797a-11ea-81ba-096dbf07c4b8.png)
+
 ----
 
 OrangePi   
