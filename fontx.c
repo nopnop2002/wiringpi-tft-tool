@@ -173,16 +173,16 @@ bool GetFontx(FontxFile *fxs, uint32_t sjis , uint8_t *pGlyph,
 	int i;
 	long offset;
 
-if(FontxDebug)printf("[GetFontx]sjis=%x %d\n",sjis,sjis);
+	if(FontxDebug)printf("[GetFontx]sjis=%x %d\n",sjis,sjis);
 	for(i=0; i<2; i++){
 		if(!Fontx_openFontxFile(&fxs[i])) continue;
-if(FontxDebug)printf("openFontxFile[%d]\n",i);
+		if(FontxDebug)printf("openFontxFile[%d]\n",i);
 		
 		if(sjis < 0x100){
 			if(fxs[i].is_ank){
-if(FontxDebug)printf("[GetFontx]fxs.is_ank fxs.fsz=%d\n",fxs[i].fsz);
+				if(FontxDebug)printf("[GetFontx]fxs.is_ank fxs.fsz=%d\n",fxs[i].fsz);
 				offset = 17 + sjis * fxs[i].fsz;
-if(FontxDebug)printf("[GetFontx]offset=%ld\n",offset);
+				if(FontxDebug)printf("[GetFontx]offset=%ld\n",offset);
 				if(fseek(fxs[i].file, offset, SEEK_SET)) {
 					printf("Fontx::fseek(18) failed.\n");
 					return false;
@@ -206,24 +206,24 @@ if(FontxDebug)printf("[GetFontx]offset=%ld\n",offset);
 		
 				while(bc--){ 
 					if(fread((char *)buf, 1, 4, fxs[i].file) != 4){
-					  printf("Fontx::fread failed.\n");
-					  return false;
+						printf("Fontx::fread failed.\n");
+						return false;
 					}
-if(FontxDebug)printf("[GetFontx]buf=%x %x\n",buf[0],buf[1]);
+					if(FontxDebug)printf("[GetFontx]buf=%x %x\n",buf[0],buf[1]);
 					if(sjis >= buf[0] && sjis <= buf[1]) {
-					  nc += sjis - buf[0];
-					  uint32_t pos = 18 + fxs[i].bc * 4 + nc * fxs[i].fsz;
-					  if(fseek(fxs[i].file, pos, SEEK_SET)) {
-					    printf("FsFontx::seek(%u) failed.\n",pos);
-					    return false;
-					  }
-					  if(fread(pGlyph, 1, fxs[i].fsz, fxs[i].file) != fxs[i].fsz){
-					    printf("Fontx::fread failed.\n");
-					    return false;
-					  }
-					  if(pw) *pw = fxs[i].w;
-					  if(ph) *ph = fxs[i].h;
-					  return true;
+						nc += sjis - buf[0];
+						uint32_t pos = 18 + fxs[i].bc * 4 + nc * fxs[i].fsz;
+						if(fseek(fxs[i].file, pos, SEEK_SET)) {
+					   		printf("FsFontx::seek(%u) failed.\n",pos);
+					    	return false;
+						}
+						if(fread(pGlyph, 1, fxs[i].fsz, fxs[i].file) != fxs[i].fsz){
+					    	printf("Fontx::fread failed.\n");
+					    	return false;
+						}
+						if(pw) *pw = fxs[i].w;
+						if(ph) *ph = fxs[i].h;
+						return true;
 					}
 					nc += buf[1] - buf[0] + 1;
 				}
@@ -239,8 +239,8 @@ if(FontxDebug)printf("[GetFontx]buf=%x %x\n",buf[0],buf[1]);
  Convert font patterns to bitmap images
 
  fonts(16X16ドット)
-		00000000    01111111
-		12345678    90123456
+	00000000    01111111
+	12345678    90123456
  01 pGlyph[000] pGlyph[001]
  02 pGlyph[002] pGlyph[003]
  03 pGlyph[004] pGlyph[005]
@@ -270,8 +270,8 @@ if(FontxDebug)printf("[GetFontx]buf=%x %x\n",buf[0],buf[1]);
 
 
  fonts(24X24ドット)
-		00000000    01111111    11122222
-		12345678    90123456    78901234
+	00000000    01111111    11122222
+	12345678    90123456    78901234
  01 pGlyph[000] pGlyph[001] pGlyph[002]
  02 pGlyph[003] pGlyph[004] pGlyph[005]
  03 pGlyph[006] pGlyph[007] pGlyph[008]
@@ -312,8 +312,8 @@ if(FontxDebug)printf("[GetFontx]buf=%x %x\n",buf[0],buf[1]);
 
 
  fonts(32X32ドット)
-		00000000    01111111    11122222    22222333
-		12345678    90123456    78901234    56789012
+	00000000    01111111    11122222    22222333
+	12345678    90123456    78901234    56789012
  01 pGlyph[000] pGlyph[001] pGlyph[002] pGlyph[003]
  02 pGlyph[004] pGlyph[005] pGlyph[006] pGlyph[007]
  03 pGlyph[008] pGlyph[009] pGlyph[010] pGlyph[011]
@@ -456,7 +456,7 @@ void ShowBitmap(uint8_t *bitmap, uint8_t pw, uint8_t ph) {
 	for (y=0;y<ph;y++) {
 		printf("%02d",y);
 		for (x=0;x<pw;x++) {
-//printf("b=%x m=%x\n",bitmap[x+(y/8)*32],0x80 >> fpos);
+			//printf("b=%x m=%x\n",bitmap[x+(y/8)*32],0x80 >> fpos);
 			if (bitmap[x+(y/8)*32] & (0x80 >> fpos)) {
 				printf("*");
 			} else {
@@ -502,23 +502,23 @@ uint16_t UTF2SJIS(uint8_t *utf8) {
 	uint16_t sjis;
 
 	if((cd = iconv_open("sjis","utf-8")) == (iconv_t)-1){
-if(FontxDebug)printf("iconv open fail \n");
+		if(FontxDebug)printf("iconv open fail \n");
 		return 0;
 	}else {
-if(FontxDebug)printf("iconv open ok \n");
+		if(FontxDebug)printf("iconv open ok \n");
 	}
 
 	iconv(cd,(char**)pi2,&ilen,(char**)po2,&olen);
 	iconv_close(cd);
 
-if(FontxDebug)printf("[UTF2SJIS]strJIS=%x-%x\n",strJIS[0],strJIS[1]);
+	if(FontxDebug)printf("[UTF2SJIS]strJIS=%x-%x\n",strJIS[0],strJIS[1]);
 	if (strJIS[0] & 0x80) {
 		sjis = strJIS[0] << 8;
 		sjis = sjis + strJIS[1];
 	} else {
 		sjis = strJIS[0];
 	}
-if(FontxDebug)printf("[UTF2SJIS]sjis=%x\n",sjis);
+	if(FontxDebug)printf("[UTF2SJIS]sjis=%x\n",sjis);
 	return sjis;
 }
 
@@ -536,7 +536,7 @@ int String2SJIS(unsigned char *str_in, uint8_t stlen, uint16_t *sjis, uint8_t ss
 
 	for(i=0;i<stlen;i++) {
 		sp = str_in[i];
-if(FontxDebug)printf("[String2SJIS]sp[%d]=%x\n",i,sp);
+		if(FontxDebug)printf("[String2SJIS]sp[%d]=%x\n",i,sp);
 		if ((sp & 0xf0) == 0xe0) { // 上位4ビットが1110なら、3バイト文字の1バイト目
 			c1 = sp;
 		} else if ((sp & 0xc0) == 0x80) { // 上位2ビットが10なら、他バイト文字の2バイト目以降
@@ -544,28 +544,28 @@ if(FontxDebug)printf("[String2SJIS]sp[%d]=%x\n",i,sp);
 				c2 = sp;
 			} else {
 				if (c1 == 0xef && c2 == 0xbd) {
-if(FontxDebug)printf("[String2SJIS]hankaku kana %x-%x-%x\n",c1,c2,sp);
+					if(FontxDebug)printf("[String2SJIS]hankaku kana %x-%x-%x\n",c1,c2,sp);
 					sjis2 = sp;
-if(FontxDebug)printf("[String2SJIS]sjis2=%x\n",sjis2);
+					if(FontxDebug)printf("[String2SJIS]sjis2=%x\n",sjis2);
 					if (spos < ssize) sjis[spos++] = sjis2;
 				} else if (c1 == 0xef && c2 == 0xbe) {
-if(FontxDebug)printf("[String2SJIS]hankaku kana %x-%x-%x\n",c1,c2,sp);
+					if(FontxDebug)printf("[String2SJIS]hankaku kana %x-%x-%x\n",c1,c2,sp);
 					sjis2 = 0xc0 + (sp - 0x80);
-if(FontxDebug)printf("[String2SJIS]sjis2=%x\n",sjis2);
+					if(FontxDebug)printf("[String2SJIS]sjis2=%x\n",sjis2);
 					if (spos < ssize) sjis[spos++] = sjis2;
 				} else {
-if(FontxDebug)printf("[String2SJIS]UTF8 %x-%x-%x\n",c1,c2,sp);
+					if(FontxDebug)printf("[String2SJIS]UTF8 %x-%x-%x\n",c1,c2,sp);
 					utf8[0] = c1;
 					utf8[1] = c2;
 					utf8[2] = sp;
 					sjis2 = UTF2SJIS(utf8);
-if(FontxDebug)printf("[String2SJIS]sjis2=%x\n",sjis2);
+					if(FontxDebug)printf("[String2SJIS]sjis2=%x\n",sjis2);
 					if (spos < ssize) sjis[spos++] = sjis2;
 				}
 				c1 = c2 = 0;
 			}
 		} else if ((sp & 0x80) == 0) { // 1バイト文字の場合
-if(FontxDebug)printf("[String2SJIS]ANK %x\n",sp);
+			if(FontxDebug)printf("[String2SJIS]ANK %x\n",sp);
 			if (spos < ssize) sjis[spos++] = sp;
 		}
 	}
