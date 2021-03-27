@@ -326,12 +326,16 @@ step4) adjust font size.
 step5) check font pattern.   
 ![FONTX-EDITTOR-3](https://user-images.githubusercontent.com/6020549/112736437-edf3a980-8f95-11eb-946a-93426b62c137.jpg)
 
-step6) save as .fmt file from your fontedit.exe.   
+step6) save as .fnt file from your fontedit.exe.   
 ![FONTX-EDITTOR-4](https://user-images.githubusercontent.com/6020549/112736443-095eb480-8f96-11eb-8516-b03e10aeadbe.jpg)
 
 step7) upload your font file to PI.Your font file is put in fontx directory.   
 
-step8) change font file   
+---
+
+# How to change display font   
+
+step1) change font file   
 ```
 if (sv.fontsize == 16) {
   strcat(fnameh,"fontx/16dot_your_font_file");
@@ -344,137 +348,60 @@ if (sv.fontsize == 16) {
   strcat(fnamez,"fontx/ILGZ32XB.FNT");
 }
 ```
-step8) change character set   
+step2) enable UTF to ISO
+```
+//sv.save[num].size = String2SJIS((unsigned char*)argv[2], strlen(argv[2]), sv.save[num].sjis, MAXCHAR);
+sv.save[num].size = String2ISO((unsigned char*)argv[2], strlen(argv[2]), sv.save[num].sjis, MAXCHAR);
+```
+
+step3) change character set   
+
 ```
 if((cd = iconv_open("ISO_8859-1","utf-8")) == (iconv_t)-1){
     return 0;
 }
 ```
 
+More detail is [here](https://github.com/nopnop2002/wiringpi-tft-tool/issues/7).
+
 ---
 
 # Font File Viewer   
 ```
 $ cc -o dump dump.c fontx.c
-$ ./dump fontx/ILGZ16XB.FNT 0x93FA
+$ ./dump fontx/font12x24.fnt 0xfc
 argc=3
-fontFile=[fontx/ILGZ16XB.FNT]
-Font width=16
-Font height=16
-Code flag=0
-Number of code blocks=94
-Block 0 start=8140 end=817e
-Block 1 start=8180 end=81fc
-Block 2 start=8240 end=827e
-Block 3 start=8280 end=82fc
-Block 4 start=8340 end=837e
-Block 5 start=8380 end=83fc
-Block 6 start=8440 end=847e
-Block 7 start=8480 end=84fc
-Block 8 start=8540 end=857e
-Block 9 start=8580 end=85fc
-Block 10 start=8640 end=867e
-Block 11 start=8680 end=86fc
-Block 12 start=8740 end=877e
-Block 13 start=8780 end=87fc
-Block 14 start=8840 end=887e
-Block 15 start=8880 end=88fc
-Block 16 start=8940 end=897e
-Block 17 start=8980 end=89fc
-Block 18 start=8a40 end=8a7e
-Block 19 start=8a80 end=8afc
-Block 20 start=8b40 end=8b7e
-Block 21 start=8b80 end=8bfc
-Block 22 start=8c40 end=8c7e
-Block 23 start=8c80 end=8cfc
-Block 24 start=8d40 end=8d7e
-Block 25 start=8d80 end=8dfc
-Block 26 start=8e40 end=8e7e
-Block 27 start=8e80 end=8efc
-Block 28 start=8f40 end=8f7e
-Block 29 start=8f80 end=8ffc
-Block 30 start=9040 end=907e
-Block 31 start=9080 end=90fc
-Block 32 start=9140 end=917e
-Block 33 start=9180 end=91fc
-Block 34 start=9240 end=927e
-Block 35 start=9280 end=92fc
-Block 36 start=9340 end=937e
-Block 37 start=9380 end=93fc
-Block 38 start=9440 end=947e
-Block 39 start=9480 end=94fc
-Block 40 start=9540 end=957e
-Block 41 start=9580 end=95fc
-Block 42 start=9640 end=967e
-Block 43 start=9680 end=96fc
-Block 44 start=9740 end=977e
-Block 45 start=9780 end=97fc
-Block 46 start=9840 end=987e
-Block 47 start=9880 end=98fc
-Block 48 start=9940 end=997e
-Block 49 start=9980 end=99fc
-Block 50 start=9a40 end=9a7e
-Block 51 start=9a80 end=9afc
-Block 52 start=9b40 end=9b7e
-Block 53 start=9b80 end=9bfc
-Block 54 start=9c40 end=9c7e
-Block 55 start=9c80 end=9cfc
-Block 56 start=9d40 end=9d7e
-Block 57 start=9d80 end=9dfc
-Block 58 start=9e40 end=9e7e
-Block 59 start=9e80 end=9efc
-Block 60 start=9f40 end=9f7e
-Block 61 start=9f80 end=9ffc
-Block 62 start=e040 end=e07e
-Block 63 start=e080 end=e0fc
-Block 64 start=e140 end=e17e
-Block 65 start=e180 end=e1fc
-Block 66 start=e240 end=e27e
-Block 67 start=e280 end=e2fc
-Block 68 start=e340 end=e37e
-Block 69 start=e380 end=e3fc
-Block 70 start=e440 end=e47e
-Block 71 start=e480 end=e4fc
-Block 72 start=e540 end=e57e
-Block 73 start=e580 end=e5fc
-Block 74 start=e640 end=e67e
-Block 75 start=e680 end=e6fc
-Block 76 start=e740 end=e77e
-Block 77 start=e780 end=e7fc
-Block 78 start=e840 end=e87e
-Block 79 start=e880 end=e8fc
-Block 80 start=e940 end=e97e
-Block 81 start=e980 end=e9fc
-Block 82 start=ea40 end=ea7e
-Block 83 start=ea80 end=eafc
-Block 84 start=eb40 end=eb7e
-Block 85 start=eb80 end=ebfc
-Block 86 start=ec40 end=ec7e
-Block 87 start=ec80 end=ecfc
-Block 88 start=ed40 end=ed7e
-Block 89 start=ed80 end=edfc
-Block 90 start=ee40 end=ee7e
-Block 91 start=ee80 end=eefc
-Block 92 start=ef40 end=ef7e
-Block 93 start=ef80 end=effc
-character code=0x93FA
-code=93fa
-GetFontx OK. code=93fa
-00................
-01................
-02...**********...
-03...*........*...
-04...*........*...
-05...*........*...
-06...*........*...
-07...**********...
-08...*........*...
-09...*........*...
-10...*........*...
-11...*........*...
-12...**********...
-13...*........*...
-14................
-15................
+fontFile=[fontx/font12x24.fnt]
+Font width=12
+Font height=24
+Code flag=1
+Number of code blocks=0
+character code=0xfc
+code=fc
+GetFontx OK. code=fc
+00............
+01............
+02............
+03..**....**..
+04..**....**..
+05............
+06............
+07............
+08.**......**.
+09.**......**.
+10.**......**.
+11.**......**.
+12.**......**.
+13.**......**.
+14.**......**.
+15.**......**.
+16.**......**.
+17..**.....**.
+18...********.
+19............
+20............
+21............
+22............
+23............
 ```
 
