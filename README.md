@@ -312,18 +312,25 @@ You can download FONTX Editor fron [here](http://elm-chan.org/fsw_e.html).
 
 ---
 
-# How to build your own font file.   
+# How to build your own font file   
 step1) download fontxedit.exe.   
+
 step2) download fonts from https://github.com/fcambus/spleen.   
+
 step3) import one of them into your fontxedit.exe.   
 ![FONTX-EDITTOR-1](https://user-images.githubusercontent.com/6020549/112736427-d7e5e900-8f95-11eb-80d5-11dd9df42903.jpg)
+
 step4) adjust font size.   
 ![FONTX-EDITTOR-2](https://user-images.githubusercontent.com/6020549/112736434-e6cc9b80-8f95-11eb-8b8e-b523746c1c96.jpg)
+
 step5) check font pattern.   
 ![FONTX-EDITTOR-3](https://user-images.githubusercontent.com/6020549/112736437-edf3a980-8f95-11eb-946a-93426b62c137.jpg)
+
 step6) save as .fmt file from your fontedit.exe.   
 ![FONTX-EDITTOR-4](https://user-images.githubusercontent.com/6020549/112736443-095eb480-8f96-11eb-8516-b03e10aeadbe.jpg)
+
 step7) upload your font file to PI.Your font file is put in fontx directory.   
+
 step8) change font file   
 ```
 if (sv.fontsize == 16) {
