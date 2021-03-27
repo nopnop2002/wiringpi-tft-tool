@@ -315,6 +315,8 @@ You can download FONTX Editor fron [here](http://elm-chan.org/fsw_e.html).
 # How to build your own font file   
 You can change these fonts to display the characters of your country.   
 - Default   
+From 0x00 to 0x7f, the characters image of Alphanumeric are stored.   
+From 0x80 to 0xff, the characters image of Japanese are stored.   
 ```
 fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric & Japanese Hankaku KATAKANA
 fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric & Japanese Hankaku KATAKANA
@@ -322,6 +324,8 @@ fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric & Japanese Hankaku KATAKANA
 ```
 
 - Localize   
+From 0x00 to 0x7f, the characters image of Alphanumeric are stored.   
+From 0x80 to 0xff, the characters image of your country are stored.   
 ```
 fontx/XXXXX16.FNT // 8x16Dot Alphanumeric & Local characters
 fontx/XXXXX24.FNT // 12x24Dot Alphanumeric & Local characters
