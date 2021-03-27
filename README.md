@@ -289,12 +289,12 @@ chmod 777 test.sh
 
 # Font File   
 This tool uses the following as default fonts:   
-- fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric
-- fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric
-- fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric
-- fontx/ILGZ16XB.FNT // 16x16Dot Japanese ShiftJIS(Not unicode)
-- fontx/ILGZ24XB.FNT // 24x24Dot Japanese ShiftJIS(Not unicode)
-- fontx/ILGZ32XB.FNT // 32x32Dot Japanese ShiftJIS(Not unicode)
+- fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric & Japanese Hankaku KATAKANA
+- fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric & Japanese Hankaku KATAKANA
+- fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric & Japanese Hankaku KATAKANA
+- fontx/ILGZ16XB.FNT // 16x16Dot Japanese 2byte Code(SJIS, Not unicode)
+- fontx/ILGZ24XB.FNT // 24x24Dot Japanese 2byte Code(SJIS, Not unicode)
+- fontx/ILGZ32XB.FNT // 32x32Dot Japanese 2byte Code(SJIS, Not unicode)
 
 Changing this file will change the font.
 
@@ -313,6 +313,15 @@ You can download FONTX Editor fron [here](http://elm-chan.org/fsw_e.html).
 ---
 
 # How to build your own font file   
+You can change these font.   
+- fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric & Japanese Hankaku KATAKANA
+- fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric & Japanese Hankaku KATAKANA
+- fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric & Japanese Hankaku KATAKANA
+
+- fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric & Local characters
+- fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric & Local characters
+- fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric & Local characters
+
 step1) download fontxedit.exe.   
 
 step2) download fonts from https://github.com/fcambus/spleen.   
