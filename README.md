@@ -348,7 +348,7 @@ if (sv.fontsize == 16) {
   strcat(fnamez,"fontx/ILGZ32XB.FNT");
 }
 ```
-step2) enable UTF to ISO
+step2) enable UTF to ISO   
 By default,The 3-byte UTF code is converted to 2-byte SJIS code.   
 The following changes will convert a 3-byte UTF code to a 1-byte ISO code.   
 ```
