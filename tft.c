@@ -148,6 +148,7 @@ if(_DEBUG_)DumpSaveFrame(sv);
       
 if(_DEBUG_)printf("add string to line [%d]\n",num);
     sv.save[num].size = String2SJIS((unsigned char*)argv[2], strlen(argv[2]), sv.save[num].sjis, MAXCHAR);
+    //sv.save[num].size = String2ISO((unsigned char*)argv[2], strlen(argv[2]), sv.save[num].sjis, MAXCHAR);
 if(_DEBUG_)DumpSaveFrame(sv);
     fp = fopen(dpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);

@@ -489,7 +489,7 @@ void DumpFX(FontxFile *fxs)
 }
 
 // UTF code(3Byte) を SJIS Code(2 Byte) に変換
-// Convert UTF code (3 Byte) to SJIS Code (2 Byte)
+// Convert UTF code (3 Byte) to Japanese SJIS Code (2 Byte)
 uint16_t UTF2SJIS(uint8_t *utf8) {
 	unsigned char strJIS[3] = {0};
 	unsigned char *pi1  = utf8;
@@ -504,8 +504,6 @@ uint16_t UTF2SJIS(uint8_t *utf8) {
 	if((cd = iconv_open("sjis","utf-8")) == (iconv_t)-1){
 		if(FontxDebug)printf("iconv open fail \n");
 		return 0;
-	}else {
-		if(FontxDebug)printf("iconv open ok \n");
 	}
 
 	iconv(cd,(char**)pi2,&ilen,(char**)po2,&olen);
@@ -522,6 +520,28 @@ uint16_t UTF2SJIS(uint8_t *utf8) {
 	return sjis;
 }
 
+// Convert UTF code (3 Byte) to ISO extended Code (0x80-0xff)
+uint16_t UTF2ISO(uint8_t *utf8) {
+	unsigned char strISO[3] = {0};
+	unsigned char *pi1 = utf8;
+	unsigned char **pi2 = &pi1;
+	unsigned char *po1 = strISO;
+	unsigned char **po2 = &po1;
+	size_t ilen = 3;
+	size_t olen = 2;
+	iconv_t cd;
+	uint16_t iso;
+
+	if((cd = iconv_open("ISO_8859-1","utf-8")) == (iconv_t)-1){
+		return 0;
+	}
+
+	iconv(cd,(char**)pi2,&ilen,(char**)po2,&olen);
+	iconv_close(cd);
+	iso = strISO[0];
+
+	return iso;
+}
 
 // UTFを含む文字列をSJISに変換
 // Convert character strings including UTF to SJIS
@@ -571,6 +591,43 @@ int String2SJIS(unsigned char *str_in, uint8_t stlen, uint16_t *sjis, uint8_t ss
 	}
 	return spos;
 }
+
+// Convert character strings including UTF to ISO
+int String2ISO(unsigned char *str_in, uint8_t stlen, uint16_t *sjis, uint8_t ssize) {
+    int i;
+    uint8_t sp;
+    uint8_t c1 = 0;
+    uint8_t c2 = 0;
+    uint8_t utf8[3];
+    uint16_t iso2;
+    int spos = 0;
+
+    for(i=0;i<stlen;i++) {
+        sp = str_in[i];
+        if(FontxDebug)printf("[String2SJIS]sp[%d]=%x\n",i,sp);
+        if ((sp & 0xf0) == 0xe0) { // 1st byte of 3-byte character
+            c1 = sp;
+        } else if ((sp & 0xc0) == 0x80) { // After the second byte of a 3-byte character
+            if (c2 == 0) {
+                c2 = sp;
+            } else { // 3rd byte of 3-byte character
+                if(FontxDebug)printf("[String2SJIS]UTF8 %x-%x-%x\n",c1,c2,sp);
+                utf8[0] = c1;
+                utf8[1] = c2;
+                utf8[2] = sp;
+                iso2 = UTF2ISO(utf8);
+                if(FontxDebug)printf("[String2ISO]iso2=%x\n",iso2);
+                if (spos < ssize) sjis[spos++] = iso2;
+                c1 = c2 = 0;
+            }
+        } else if ((sp & 0x80) == 0) { // Single-byte character
+            if(FontxDebug)printf("[String2SJIS]ANK %x\n",sp);
+            if (spos < ssize) sjis[spos++] = sp;
+        }
+    }
+    return spos;
+}
+
 
 // 8ビットデータを反転
 // Invert 8-bit data
