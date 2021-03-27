@@ -358,7 +358,8 @@ sv.save[num].size = String2ISO((unsigned char*)argv[2], strlen(argv[2]), sv.save
 ```
 
 step3) change character set   
-
+"ISO_8859-1" will convert 3-byte UTF code to 1-byte ISO code.    
+Please change to the character set of your country.   
 ```
 if((cd = iconv_open("ISO_8859-1","utf-8")) == (iconv_t)-1){
     return 0;
