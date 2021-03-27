@@ -322,6 +322,8 @@ fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric & Japanese Hankaku KATAKANA
 fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric & Japanese Hankaku KATAKANA
 fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric & Japanese Hankaku KATAKANA
 ```
+0xCA is Japanese.   
+![FONTX-EDITTOR-11](https://user-images.githubusercontent.com/6020549/112738034-b808f200-8fa2-11eb-9b91-5a937022d1c3.jpg)
 
 - Localize   
 From 0x00 to 0x7f, the characters image of Alphanumeric are stored.   
@@ -331,6 +333,8 @@ fontx/XXXXX16.FNT // 8x16Dot Alphanumeric & Local characters
 fontx/XXXXX24.FNT // 12x24Dot Alphanumeric & Local characters
 fontx/XXXXX32.FNT // 16x32Dot Alphanumeric & Local characters
 ```
+0xCA is LATIN.   
+![FONTX-EDITTOR-12](https://user-images.githubusercontent.com/6020549/112738041-c48d4a80-8fa2-11eb-9d66-1424fc905dd3.jpg)
 
 step1) download fontxedit.exe.   
 
