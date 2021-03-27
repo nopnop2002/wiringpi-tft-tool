@@ -331,7 +331,7 @@ You can download FONTX Editor fron [here](http://elm-chan.org/fsw_e.html).
 $ cc -o dump dump.c fontx.c
 $ ./dump fontx/ILGZ16XB.FNT 0x93FA
 argc=3
-fontFile=[/home/nop/ILFONT03/ILGZ16XB.FNT]
+fontFile=[fontx/ILGZ16XB.FNT]
 Font width=16
 Font height=16
 Code flag=0
