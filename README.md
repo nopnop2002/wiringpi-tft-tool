@@ -313,14 +313,20 @@ You can download FONTX Editor fron [here](http://elm-chan.org/fsw_e.html).
 ---
 
 # How to build your own font file   
-You can change these font.   
-- fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric & Japanese Hankaku KATAKANA
-- fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric & Japanese Hankaku KATAKANA
-- fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric & Japanese Hankaku KATAKANA
+You can change these fonts to display the characters of your country.   
+- Default   
+```
+fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric & Japanese Hankaku KATAKANA
+fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric & Japanese Hankaku KATAKANA
+fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric & Japanese Hankaku KATAKANA
+```
 
-- fontx/ILGH16XB.FNT // 8x16Dot Alphanumeric & Local characters
-- fontx/ILGH24XB.FNT // 12x24Dot Alphanumeric & Local characters
-- fontx/ILGH32XB.FNT // 16x32Dot Alphanumeric & Local characters
+- Localize   
+```
+fontx/XXXXX16.FNT // 8x16Dot Alphanumeric & Local characters
+fontx/XXXXX24.FNT // 12x24Dot Alphanumeric & Local characters
+fontx/XXXXX32.FNT // 16x32Dot Alphanumeric & Local characters
+```
 
 step1) download fontxedit.exe.   
 
