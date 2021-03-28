@@ -336,20 +336,20 @@ fontx/XXXXX32.FNT // 16x32Dot Alphanumeric & Local characters
 0xCA is LATIN.   
 ![FONTX-EDITTOR-12](https://user-images.githubusercontent.com/6020549/112738041-c48d4a80-8fa2-11eb-9d66-1424fc905dd3.jpg)
 
-step1) download fontxedit.exe   
+step1) download fontxedit.exe.   
 
-step2) download fonts from https://github.com/fcambus/spleen   
+step2) download BDF font file from Internet. I downloaded from [here](https://github.com/fcambus/spleen).   
 
-step3) import one of them into your fontxedit.exe. This tool can convert from BDF to FONTX   
+step3) import one of them into your fontxedit.exe. This tool can convert from BDF to FONTX.   
 ![FONTX-EDITTOR-1](https://user-images.githubusercontent.com/6020549/112736427-d7e5e900-8f95-11eb-80d5-11dd9df42903.jpg)
 
-step4) adjust font size   
+step4) adjust font size.   
 ![FONTX-EDITTOR-2](https://user-images.githubusercontent.com/6020549/112736434-e6cc9b80-8f95-11eb-8b8e-b523746c1c96.jpg)
 
-step5) check font pattern   
+step5) check font pattern.   
 ![FONTX-EDITTOR-3](https://user-images.githubusercontent.com/6020549/112736437-edf3a980-8f95-11eb-946a-93426b62c137.jpg)
 
-step6) save as .fnt file from your fontedit.exe   
+step6) save as .fnt file from your fontedit.exe.   
 ![FONTX-EDITTOR-4](https://user-images.githubusercontent.com/6020549/112736443-095eb480-8f96-11eb-8516-b03e10aeadbe.jpg)
 
 step7) upload your font file to PI. Your font file is put in fontx directory.   
@@ -358,7 +358,7 @@ step7) upload your font file to PI. Your font file is put in fontx directory.
 
 # How to change display font   
 
-step1) change font file   
+step1) change font file.   
 ```
 if (sv.fontsize == 16) {
   strcat(fnameh,"fontx/16dot_your_font_file");
@@ -371,7 +371,7 @@ if (sv.fontsize == 16) {
   strcat(fnamez,"fontx/ILGZ32XB.FNT");
 }
 ```
-step2) enable UTF to ISO   
+step2) enable UTF to ISO.   
 By default,The 3-byte UTF code is converted to 2-byte SJIS code.   
 SJIS is Japanese extended character set.   
 The following changes will convert a 3-byte UTF code to a 1-byte ISO code.   
@@ -380,7 +380,7 @@ The following changes will convert a 3-byte UTF code to a 1-byte ISO code.
 sv.save[num].size = String2ISO((unsigned char*)argv[2], strlen(argv[2]), sv.save[num].sjis, MAXCHAR);
 ```
 
-step3) change character set   
+step3) change character set.   
 "ISO_8859-1" will convert 3-byte UTF code to 1-byte ISO code.    
 Please change to the character set of your country.   
 ```
