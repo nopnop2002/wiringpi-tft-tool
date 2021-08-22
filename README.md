@@ -41,7 +41,7 @@ You can choose BCM2835 library/WiringPi(WiringOp) library.
 - OPEN-SMART ILI9488 16Pin-Parallel(*1)   
 
 (*1)   
-__LED pins connect to GND instead of 3.3V.__   
+LED pins connect to GND instead of 3.3V.   
 
 (*2)   
 It has a GRAM offset.   
@@ -155,7 +155,7 @@ Pin define is "pin.conf".
 ```
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -D__DRIVER__   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -D_DRIVER_   
 ```
 
 __DRIVER__  
@@ -231,8 +231,12 @@ P : show pin assignment
 ----
 
 # Start Demo    
-chmod 777 test.sh   
-./test.sh   
+```
+chmod 777 test.sh
+chmod 777 me.sh
+./test.sh
+./me.sh
+```
 
 ---
 
