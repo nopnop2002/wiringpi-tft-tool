@@ -1,4 +1,5 @@
 #!/bin/bash
+#set -x
 
 ./tft r
 ./tft R90

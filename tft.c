@@ -519,26 +519,26 @@ Show Usage
 void usage(char *prog){
 	printf("Usage : %s option\n",prog);
 	printf("Options:\n");
-	printf("	s							show display\n");
-	printf("	r							remove all string\n");
-	printf("	+n string			add string to line#n\n");
-	printf("	-n						delete string from line#n\n");
-	printf("	Fn COLOR			set fore ground color to line#n\n");
-	printf("	Bn COLOR			set back ground color to line#n\n");
-	printf("	B0 COLOR			set base color(Default is WHITE)\n");
-	printf("		 RED/GREEN/BLUE/BLACK/WHITE/GRAY/YELLOW/CYAN/PURPLE\n");
-	printf("	+U n					set underline to line#n\n");
-	printf("	-U n					unset underline to line#n\n");
-	printf("	+L						line scroll up\n");
-	printf("	-L						line scroll down\n");
-	printf("	Pn c					set start colum c to line#n\n");
-	printf("	16						draw 16 dot fonts(Default)\n");
-	printf("	24						draw 24 dot fonts\n");
-	printf("	32						draw 32 dot fonts\n");
-	printf("	R0						set angle 0(Default)\n");
-	printf("	R90						set angle 90\n");
-	printf("	R180					set angle 180\n");
-	printf("	R270					set angle 270\n");
+	printf("	s\t\tshow display\n");
+	printf("	r\t\tremove all string\n");
+	printf("	+n string\tadd string to line#n\n");
+	printf("	-n\t\tdelete string from line#n\n");
+	printf("	Fn COLOR\tset fore ground color to line#n\n");
+	printf("	Bn COLOR\tset back ground color to line#n\n");
+	printf("	B0 COLOR\tset base color(Default is WHITE)\n");
+	printf("	\t\tRED/GREEN/BLUE/BLACK/WHITE/GRAY/YELLOW/CYAN/PURPLE\n");
+	printf("	+U n\t\tset underline to line#n\n");
+	printf("	-U n\t\tunset underline to line#n\n");
+	printf("	+L\t\tline scroll up\n");
+	printf("	-L\t\tline scroll down\n");
+	printf("	Pn c\t\tset start colum c to line#n\n");
+	printf("	16\t\tdraw 16 dot fonts(Default)\n");
+	printf("	24\t\tdraw 24 dot fonts\n");
+	printf("	32\t\tdraw 32 dot fonts\n");
+	printf("	R0\t\tset angle 0(Default)\n");
+	printf("	R90\t\tset angle 90\n");
+	printf("	R180\t\tset angle 180\n");
+	printf("	R270\t\tset angle 270\n");
 }
 
 void InitSaveData(SaveFrame *hoge) {
@@ -570,16 +570,18 @@ int ReadTFTConfig(char *path, int *width, int *height) {
 	FILE *fp;
 	char buff[128];
 	
-//	printf("path=%s\n",path);
+	//printf("path=%s\n",path);
 	fp = fopen(path,"r");
 	if(fp == NULL) return 0;
 	while (fgets(buff,128,fp) != NULL) {
-//		printf("buf=%s\n",buff);
-//		printf("buff[0]=%x\n",buff[0]);
+	//printf("buf=%s\n",buff);
+	//printf("buff[0]=%x\n",buff[0]);
 		if (buff[0] == '#') continue;
 		if (buff[0] == 0x0a) continue;
-		sscanf(buff, "width=%d height=%d",width,height);
-//		printf("width=%d height=%d\n",*width,*height);
+		if (strncmp(buff, "width=", 6) == 0) {
+			sscanf(buff, "width=%d height=%d",width,height);
+			//printf("width=%d height=%d\n",*width,*height);
+		}
 	}
 	fclose(fp);
 	return 1;
@@ -589,12 +591,12 @@ int ReadPinConfig(TFTPin *pin, char *path) {
 	FILE *fp;
 	char buff[128];
 	
-//	printf("path=%s\n",path);
+	//printf("path=%s\n",path);
 	fp = fopen(path,"r");
 	if(fp == NULL) return 0;
 	while (fgets(buff,128,fp) != NULL) {
-//		printf("buf=%s\n",buff);
-//		printf("buff[0]=%x\n",buff[0]);
+		//printf("buf=%s\n",buff);
+		//printf("buff[0]=%x\n",buff[0]);
 		if (buff[0] == '#') continue;
 		if (buff[0] == 0x0a) continue;
 		if (strncmp(buff,"RST=",4) == 0) {
