@@ -1,35 +1,35 @@
 #include "fontx.h"
 
 typedef struct {
-  int rst;
-  int cs;
-  int rs;
-  int wr;
-  int rd;
-  int d0;
-  int d1;
-  int d2;
-  int d3;
-  int d4;
-  int d5;
-  int d6;
-  int d7;
+	int rst;
+	int cs;
+	int rs;
+	int wr;
+	int rd;
+	int d0;
+	int d1;
+	int d2;
+	int d3;
+	int d4;
+	int d5;
+	int d6;
+	int d7;
 } TFTPin;
 
-#define RED             0xf800
-#define GREEN           0x07e0
-#define BLUE            0x001f
-#define BLACK           0x0000
-#define WHITE           0xffff
-#define GRAY            0x8c51
-#define YELLOW          0xFFE0
-#define CYAN            0x07FF
-#define PURPLE          0xF81F
+#define RED		0xf800
+#define GREEN	0x07e0
+#define BLUE	0x001f
+#define BLACK	0x0000
+#define WHITE	0xffff
+#define GRAY	0x8c51
+#define YELLOW	0xFFE0
+#define CYAN	0x07FF
+#define PURPLE	0xF81F
 
-#define DIRECTION0      0
-#define DIRECTION90     1
-#define DIRECTION180    2
-#define DIRECTION270    3
+#define DIRECTION0		0
+#define DIRECTION90		1
+#define DIRECTION180	2
+#define DIRECTION270	3
 
 void lcdWriteByte(uint8_t data);
 void lcdWriteDataWord(uint16_t data);

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ./tft r
-./tft R270
+./tft R90
 ./tft 32
 
 hostname=`hostname`
@@ -11,10 +11,11 @@ hostname=`hostname`
 #./tft +2 "$PRETTY_NAME" 
 IFS=' '
 set -- $PRETTY_NAME
-./tft +2 "$1 $2 $3" 
+./tft +2 "$1" 
+./tft +3 "$2 $3" 
 
 #. /etc/armbian-release
-#./tft +2 "Armbian "$VERSION
+#./tft +3 "Armbian "$VERSION
 
 ipaddr=`sudo ifconfig eth0 |grep "inet" |awk {'print $2'} |cut -f2 -d:`
 if [ -z ${ipaddr} ]; then
@@ -23,14 +24,14 @@ fi
 if [ -z ${ipaddr} ]; then
   ipaddr=`sudo ifconfig wlan1 |grep "inet" |awk {'print $2'} |cut -f2 -d:`
 fi
-./tft +3 $ipaddr
+./tft +4 $ipaddr
 
 model=`./tft M`
-./tft +4 $model
+./tft +5 $model
 
 #raspberry pi
 temp0=`vcgencmd measure_temp`
-./tft +5 $temp0
+./tft +6 $temp0
 
 #orange pi
 #temp0=`cat /sys/devices/virtual/thermal/thermal_zone0/temp`
