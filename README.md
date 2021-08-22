@@ -46,6 +46,7 @@ __LED pins connect to GND instead of 3.3V.__
 (*2)   
 It has a GRAM offset.   
 You need to specify GRAM offset in tft.conf.   
+
 ----
 
 Left to Right   
