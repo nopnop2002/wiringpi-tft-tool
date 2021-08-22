@@ -33,7 +33,8 @@ typedef struct {
 
 typedef struct {
 	uint16_t basecolor;
-	uint16_t fontsize;
+	uint16_t fontwidth;
+	uint16_t fontheight;
 	uint16_t direction;
 	SaveData save[MAXLINE];
 } SaveFrame;
@@ -41,12 +42,13 @@ typedef struct {
 void usage(char *prog);
 void InitSaveData(SaveFrame *hoge);
 void DumpSaveFrame(SaveFrame hoge);
-int ReadTFTConfig(char *path, int *width, int *height);
+int ReadTFTConfig(char *path, int *width, int *height, int *xofs, int *yofs);
 int ReadPinConfig(TFTPin *pins, char *path);
 
 int main(int argc, char **argv){
 	int i;
-	int XMAX,YMAX;
+	int XMAX, YMAX;
+	int XOFS, YOFS;
 	char dir[128];
 	char cpath[128];
 	char dpath[128];
@@ -55,7 +57,7 @@ int main(int argc, char **argv){
 	FILE *fp;
 	SaveFrame sv;
 	
-if(_DEBUG_)  printf("argv[0]=%s\n",argv[0]);
+if(_DEBUG_)printf("argv[0]=%s\n",argv[0]);
 	strcpy(dir, argv[0]);
 	for(i=strlen(dir);i>0;i--) {
 		if (dir[i-1] == '/') {
@@ -63,25 +65,25 @@ if(_DEBUG_)  printf("argv[0]=%s\n",argv[0]);
 			break;
 		}
 	}
-if(_DEBUG_)  printf("dir=%s\n",dir);
+if(_DEBUG_)printf("dir=%s\n",dir);
 	strcpy(dpath,dir);
 	strcat(dpath,"tft.data");
-if(_DEBUG_)  printf("dpath=%s\n",dpath);
+if(_DEBUG_)printf("dpath=%s\n",dpath);
 	strcpy(cpath,dir);
 	strcat(cpath,"tft.conf");
-if(_DEBUG_)  printf("cpath=%s\n",cpath);
+if(_DEBUG_)printf("cpath=%s\n",cpath);
 	strcpy(spath,dir);
 	strcat(spath,"spi.conf");
-if(_DEBUG_)  printf("spath=%s\n",spath);
+if(_DEBUG_)printf("spath=%s\n",spath);
 	strcpy(ppath,dir);
 	strcat(ppath,"pin.conf");
-if(_DEBUG_)  printf("ppath=%s\n",ppath);
+if(_DEBUG_)printf("ppath=%s\n",ppath);
 
-	if (ReadTFTConfig(cpath,&XMAX,&YMAX) == 0) {
+	if (ReadTFTConfig(cpath, &XMAX, &YMAX, &XOFS, &YOFS) == 0) {
 		printf("%s Not found\n",cpath);
-		return 0;
+		return 1;
 	}
-if(_DEBUG_)  printf("ReadTFTConfig:XMAX=%d YMAX=%d\n",XMAX,YMAX);
+if(_DEBUG_)printf("ReadTFTConfig:XMAX=%d YMAX=%d XOFS=%d YOFS=%d\n",XMAX, YMAX, XOFS, YOFS);
 
 #ifdef SPI
 	TFTPin pins;
@@ -153,7 +155,7 @@ if(_DEBUG_)DumpSaveFrame(sv);
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if ( (strcmp(argv[1],"-1") == 0) ||
@@ -172,20 +174,21 @@ if(_DEBUG_)DumpSaveFrame(sv);
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if ( (strcmp(argv[1],"16") == 0) ||
 	(strcmp(argv[1],"24") == 0) ||
 	(strcmp(argv[1],"32") == 0) ) {
-		if (strcmp(argv[1],"16") == 0) sv.fontsize = 16;
-		if (strcmp(argv[1],"24") == 0) sv.fontsize = 24;
-		if (strcmp(argv[1],"32") == 0) sv.fontsize = 32;
-if(_DEBUG_)printf("set font size=%d\n",sv.fontsize);
+		if (strcmp(argv[1],"16") == 0) sv.fontheight = 16;
+		if (strcmp(argv[1],"24") == 0) sv.fontheight = 24;
+		if (strcmp(argv[1],"32") == 0) sv.fontheight = 32;
+		sv.fontwidth = sv.fontheight / 2;
+if(_DEBUG_)printf("set fontwidth=%d fontheight=%d\n",sv.fontwidth, sv.fontheight);
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if ( (strcmp(argv[1],"R0") == 0) ||
@@ -200,7 +203,7 @@ if(_DEBUG_)printf("set direction=%d\n",sv.direction);
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if ( (strcmp(argv[1],"B0") == 0) ) {
@@ -217,7 +220,7 @@ if(_DEBUG_)printf("set base color=%x\n",sv.basecolor);
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if ( (strcmp(argv[1],"F1") == 0) ||
@@ -243,7 +246,7 @@ if(_DEBUG_)printf("set fcolor to line [%d]=%x\n",num,sv.save[num].fcolor);
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if ( (strcmp(argv[1],"B1") == 0) ||
@@ -269,7 +272,7 @@ if(_DEBUG_)printf("set bcolor to line [%d]=%x\n",num,sv.save[num].bcolor);
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if ( (strcmp(argv[1],"+U") == 0) ||
@@ -277,13 +280,13 @@ if(_DEBUG_)printf("set bcolor to line [%d]=%x\n",num,sv.save[num].bcolor);
 		strcpy(numc,argv[2]);
 		num = (numc[0] - '0') - 1;
 if(_DEBUG_)printf("set/unset underline to line [%d]\n",num);
-		if (num < 0 || num > (MAXLINE+1)) return 0;
+		if (num < 0 || num >= MAXLINE) return 1;
 		if (strcmp(argv[1],"+U") == 0) sv.save[num].enhance = 1;
 		if (strcmp(argv[1],"-U") == 0) sv.save[num].enhance = 0;
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if ( strcmp(argv[1],"+L") == 0) {
@@ -298,7 +301,7 @@ if(_DEBUG_)printf("set/unset underline to line [%d]\n",num);
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if ( strcmp(argv[1],"-L") == 0) {
@@ -313,7 +316,7 @@ if(_DEBUG_)printf("set/unset underline to line [%d]\n",num);
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if ( (strcmp(argv[1],"P1") == 0) ||
@@ -329,13 +332,13 @@ if(_DEBUG_)printf("set/unset underline to line [%d]\n",num);
 		strcpy(numc,argv[2]);
 		int col;
 		col = atoi(numc) - 1;
-		if (col < 0 || col > 16) return 0;
+		if (col < 0 || col >= MAXCHAR) return 1;
 if(_DEBUG_)printf("set start colum to line [%d] = %d\n",num,col);
 		sv.save[num].colum = col;
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if (strcmp(argv[1],"r") == 0) {
@@ -345,7 +348,7 @@ if(_DEBUG_)DumpSaveFrame(sv);
 		fp = fopen(dpath,"wb");
 		fwrite(&sv,sizeof(sv),1,fp);
 		fclose(fp);
-		return 1;
+		return 0;
 	}
 
 	if (strcmp(argv[1],"s") == 0) {
@@ -355,14 +358,14 @@ if(_DEBUG_)printf("show dislay\n");
 		FontxFile fx[2];
 		strcpy(fnameh,dir);
 		strcpy(fnamez,dir);
-if(_DEBUG_)printf("sv.fontsize=%d\n",sv.fontsize);
-		if (sv.fontsize == 16) {
+if(_DEBUG_)printf("sv.fontwidth=%d sv.fontheight=%d\n",sv.fontwidth, sv.fontheight);
+		if (sv.fontheight == 16) {
 			strcat(fnameh,"fontx/ILGH16XB.FNT");
 			strcat(fnamez,"fontx/ILGZ16XB.FNT");
-		} else if (sv.fontsize == 24) {
+		} else if (sv.fontheight == 24) {
 			strcat(fnameh,"fontx/ILGH24XB.FNT");
 			strcat(fnamez,"fontx/ILGZ24XB.FNT");
-		} else if (sv.fontsize == 32) {
+		} else if (sv.fontheight == 32) {
 			strcat(fnameh,"fontx/ILGH32XB.FNT");
 			strcat(fnamez,"fontx/ILGZ32XB.FNT");
 		}
@@ -374,54 +377,109 @@ if(_DEBUG_)printf("fnameh=%s\nfnamez=%s\n",fnameh,fnamez);
 		#define MODEL "SPI"
 #endif
 
+#ifdef ILI9225
+		lcdInit(0x9225, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "ILI9225"
+#endif
+
+#ifdef ILI9226
+		lcdInit(0x9225, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "ILI9226"
+#endif
+
+#ifdef ILI9320
+		lcdInit(0x9320, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "ILI9320"
+#endif
+
 #ifdef ILI9325
-		lcdInit(0x9325, XMAX, YMAX, pins);
+		lcdInit(0x9325, XMAX, YMAX, XOFS, YOFS, pins);
 		#define MODEL "ILI9325"
 #endif
 
 #ifdef ILI9327
-		lcdInit(0x9327, XMAX, YMAX, pins);
+		lcdInit(0x9327, XMAX, YMAX, XOFS, YOFS, pins);
 		#define MODEL "ILI9327"
 #endif
 
+#ifdef ILI9340
+		lcdInit(0x9341, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "ILI9340"
+#endif
+
 #ifdef ILI9341
-		lcdInit(0x9341, XMAX, YMAX, pins);
+		lcdInit(0x9341, XMAX, YMAX, XOFS, YOFS, pins);
 		#define MODEL "ILI9341"
 #endif
 
 #ifdef ILI9342
-		lcdInit(0x9342, XMAX, YMAX, pins);
+		lcdInit(0x9342, XMAX, YMAX, XOFS, YOFS, pins);
 		#define MODEL "ILI9342"
 #endif
 
 #ifdef ILI9481
-		lcdInit(0x9481, XMAX, YMAX, pins);
+		lcdInit(0x9481, XMAX, YMAX, XOFS, YOFS, pins);
 		#define MODEL "ILI9481"
 #endif
 
-#ifdef SPFD5408
-		lcdInit(0x5408, XMAX, YMAX, pins);
-		#define MODEL "SPFD5408"
+#ifdef ILI9486
+		lcdInit(0x9486, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "ILI9486"
 #endif
 
-#ifdef S6D1121
-		lcdInit(0x1121, XMAX, YMAX, pins);
-		#define MODEL "S6D1121"
+#ifdef ILI9488
+		lcdInit(0x9488, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "ILI9488"
+#endif
+
+#ifdef LGDP4532
+		lcdInit(0x4532, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "LGDP4532"
 #endif
 
 #ifdef R61505U
-		lcdInit(0x1505, XMAX, YMAX, pins);
+		lcdInit(0x9320, XMAX, YMAX, XOFS, YOFS, pins);
 		#define MODEL "R61505U"
 #endif
 
 #ifdef R61509V
-		lcdInit(0xB509, XMAX, YMAX, pins);
+		lcdInit(0xB509, XMAX, YMAX, XOFS, YOFS, pins);
 		#define MODEL "R61509V"
 #endif
 
+#ifdef S6D1121
+		lcdInit(0x1121, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "S6D1121"
+#endif
+
+#ifdef SPFD5408
+		lcdInit(0x9320, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "SPFD5408"
+#endif
+
+#ifdef ST7775
+		lcdInit(0x9225, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "ST7775"
+#endif
+
 #ifdef ST7781
-		lcdInit(0x7781, XMAX, YMAX, pins);
+		lcdInit(0x7781, XMAX, YMAX, XOFS, YOFS, pins);
 		#define MODEL "ST7781"
+#endif
+
+#ifdef ST7783
+		lcdInit(0x7781, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "ST7783"
+#endif
+
+#ifdef ST7793
+		lcdInit(0xB509, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "ST7793"
+#endif
+
+#ifdef ST7796
+		lcdInit(0x9486, XMAX, YMAX, XOFS, YOFS, pins);
+		#define MODEL "ST7796"
 #endif
 
 
@@ -431,29 +489,20 @@ if(_DEBUG_)printf("fnameh=%s\nfnamez=%s\n",fnameh,fnamez);
 		lcdSetFontDirection(sv.direction);
 
 		uint16_t xpos,ypos;
-
-#if 0
-	uint16_t color;
-	xpos = 0;
-	ypos = (YMAX -1)-(16*1);
-	color = BLACK;
-	xpos = lcdDrawSJISChar(fx16, xpos, ypos, 0x30, color);
-#endif
-
 		for (num=0;num<MAXLINE;num++) {
 			if (sv.save[num].size == 0) continue;
 			if (sv.direction == DIRECTION0) {
-				xpos = sv.save[num].colum * sv.fontsize;
-				ypos = (YMAX-1)-(sv.fontsize*(num+1));
+				xpos = sv.save[num].colum * sv.fontwidth;
+				ypos = sv.fontheight*(num+1) - 1;
 			} else if (sv.direction == DIRECTION90) {
-				xpos = (XMAX-1)-(sv.fontsize*(num+1));
-				ypos = (YMAX-1)-(sv.save[num].colum * sv.fontsize);
+				xpos = (XMAX-1)-(sv.fontheight*(num+1)) + 1;
+				ypos = sv.save[num].colum * sv.fontwidth;
 			} else if (sv.direction == DIRECTION180) {
-				xpos = (XMAX-1) - sv.save[num].colum * sv.fontsize;
-				ypos = sv.fontsize*(num+1);
+				xpos = (XMAX-1)-sv.save[num].colum * sv.fontwidth;
+				ypos = (YMAX-1)-(sv.fontheight*(num+1)) + 1;
 			} else if (sv.direction == DIRECTION270) {
-				xpos = sv.fontsize*(num+1);
-				ypos = sv.save[num].colum * sv.fontsize;
+				xpos = sv.fontheight*(num+1) - 1;
+				ypos = (YMAX-1)-(sv.save[num].colum * sv.fontwidth);
 			}
 if(_DEBUG_)printf("xpos=%d ypos=%d\n",xpos,ypos);
 			lcdUnsetFontFill();
@@ -474,14 +523,17 @@ if(_DEBUG_)printf("xpos=%d ypos=%d\n",xpos,ypos);
 if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
 			}
 		}
+		return 0;
 	}
 
 	if (strcmp(argv[1],"D") == 0) {
 		DumpSaveFrame(sv);
+		return 0;
 	}
 
 	if (strcmp(argv[1],"M") == 0) {
 		printf("%s(%3dx%3d)\n",MODEL,XMAX,YMAX);
+		return 0;
 	}
 
 	if (strcmp(argv[1],"P") == 0) {
@@ -507,8 +559,9 @@ if(_DEBUG_)printf("xpos(2)=%d ypos(2)=%d\n",xpos,ypos);
 		printf("D6 =%d\n",pins.d6);
 		printf("D7 =%d\n",pins.d7);
 #endif
+		return 0;
 	}
-	return 0;
+	return 1;
 }
 
 
@@ -543,32 +596,34 @@ void usage(char *prog){
 
 void InitSaveData(SaveFrame *hoge) {
 	hoge->basecolor = WHITE;
-	hoge->fontsize	= 16;
+	hoge->fontheight = 16;
+	hoge->fontwidth	= 8;
 	hoge->direction  = 0;
 }
 
 void DumpSaveFrame(SaveFrame hoge) {
-	int i,j;
-	
 	printf("basecolor=%x\n",hoge.basecolor);
-	printf("fontsize=%d\n",hoge.fontsize);
+	printf("fontwidth=%d\n",hoge.fontwidth);
+	printf("fontheight=%d\n",hoge.fontheight);
 	printf("direction=%d\n",hoge.direction);
-	for(i=0;i<MAXLINE;i++) {
+	for(int i=0;i<MAXLINE;i++) {
 		printf("[%d].colum=%d ",i,hoge.save[i].colum);
 		printf("[%d].fcolor=%x ",i,hoge.save[i].fcolor);
 		printf("[%d].bcolor=%x ",i,hoge.save[i].bcolor);
 		printf("[%d].enhance=%d",i,hoge.save[i].enhance);
 		printf("[%d].size=%d\n",i,hoge.save[i].size);
-		for(j=0;j<hoge.save[i].size;j++) {
+		for(int j=0;j<hoge.save[i].size;j++) {
 			printf("[%d].sjis[%d]=%x\n",i,j,hoge.save[i].sjis[j]);
 		}
 	}
 
 }
 
-int ReadTFTConfig(char *path, int *width, int *height) {
+int ReadTFTConfig(char *path, int *width, int *height, int *xofs, int *yofs) {
 	FILE *fp;
 	char buff[128];
+	*xofs = 0;
+	*yofs = 0;
 	
 	//printf("path=%s\n",path);
 	fp = fopen(path,"r");
@@ -579,8 +634,11 @@ int ReadTFTConfig(char *path, int *width, int *height) {
 		if (buff[0] == '#') continue;
 		if (buff[0] == 0x0a) continue;
 		if (strncmp(buff, "width=", 6) == 0) {
-			sscanf(buff, "width=%d height=%d",width,height);
-			//printf("width=%d height=%d\n",*width,*height);
+			sscanf(buff, "width=%d height=%d",width, height);
+			//printf("width=%d height=%d\n",*width, *height);
+		} else if (strncmp(buff, "xofs=", 5) == 0) {
+			sscanf(buff, "xofs=%d yofs=%d",xofs, yofs);
+			//printf("xofs=%d yofs=%d\n",*xofs, *yofs);
 		}
 	}
 	fclose(fp);

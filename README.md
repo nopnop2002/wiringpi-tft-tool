@@ -5,24 +5,47 @@ You can operate from command line.
 You can show any text string.   
 You can choose BCM2835 library/WiringPi(WiringOp) library.   
 
-I tested these TFT.   
+# Support driver
 
-SPI 128x128 ST7735   
-SPI 128x160 ST7735   
-SPI 240x320 ILI9340   
-SPI 240x320 ILI9341   
+## SPI TFT
+- ST7735   
+- ILI9340   
+- ILI9341   
 
-8bit Parallel 240x320 ILI9325   
-8bit Parallel 240x400 ILI9327   
-8bit Parallel 240x320 ILI9341   
-8bit Parallel 240x320 ILI9342   
-8bit Parallel 320x480 ILI9481   
-8bit Parallel 240x320 SPFD5408   
-8bit Parallel 240x320 S6D1121   
-8bit Parallel 240x320 R61505U   
-8bit Parallel 240x400 R61509V   
-8bit Parallel 240x320 ST7781   
+## 8 bit Parallel Shield   
+- ILI9225   
+- ILI9226(Same as ILI9225)   
+- ILI9320   
+- ILI9325   
+- ILI9341   
+- ILI9342   
+- ILI9481   
+- ILI9486   
+- ILI9488   
+- SPFD5408(Same as ILI9320)   
+- R61509V   
+- ST7775(Same as ILI9225)   
+- ST7781   
+- ST7783(Same as ST7781)   
+- ST7793(Same as R61509)   
+- ST7796(Same as ILI9486)   
 
+## OPEN-SMART Products   
+- OPEN-SMART ILI9225 TFT-Shield   
+- OPEN-SMART ILI9327 TFT-Shield(*2)   
+- OPEN-SMART ILI9340 TFT-Shield   
+- OPEN-SMART S6D1121 16Pin-Parallel(*1)   
+- OPEN-SMART ST7775  16Pin-Parallel(*1)   
+- OPEN-SMART ST7783  16Pin-Parallel(*1)   
+- OPEN-SMART R61509V 16Pin-Parallel(*1)   
+- OPEN-SMART ILI9488 16Pin-Parallel(*1)   
+
+(*1)   
+__LED pins connect to GND instead of 3.3V.__   
+
+(*2)   
+It has a GRAM offset.   
+You need to specify GRAM offset in tft.conf.   
 ----
 
 Left to Right   
@@ -71,6 +94,32 @@ Opi have only 1 SPI.
 OPi-PC have CE0 and GPIO8.   
 OPi ZERO have CE1 and GPIO8.   
 
+# Build for SPI TFT using BCM2835 library   
+RPi Only, Very fast.  
+
+```
+wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.42.tar.gz   
+tar zxvf bcm2835-1.42.tar.gz   
+cd bcm2835-1.42   
+./configure   
+make   
+sudo make check   
+sudo make install   
+cd $HOME   
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o tft tft.c fontx.c spilib.c -lbcm2835 -lm -lpthread -DSPI -DBCM   
+```
+
+# Build for SPI TFT using WiringPi library  
+
+```
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o tft tft.c fontx.c spilib.c -lwiringPi -lm -lpthread -DSPI -DWPI
+```
+
+
 ----
 
 # Wirering for 8bit Parallel TFT   
@@ -100,145 +149,44 @@ OPi ZERO have CE1 and GPIO8.
 You can change any pin.   
 Pin define is "pin.conf".   
 
-----
-
-# Build for SPI TFT using BCM2835 library   
-RPi Only, Very fast  
-
-```
-wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.42.tar.gz   
-tar zxvf bcm2835-1.42.tar.gz   
-cd bcm2835-1.42   
-./configure   
-make   
-sudo make check   
-sudo make install   
-cd $HOME   
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c spilib.c -lbcm2835 -lm -lpthread -DSPI -DBCM   
-```
-
-----
-
-# Build for SPI TFT using WiringPi/WiringOp library  
-Both of RPi/OPi   
+# Build for 8bit Parallel TFT using WiringPi library  
 
 ```
 git clone https://github.com/nopnop2002/wiringpi-tft-tool   
 cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c spilib.c -lwiringPi -lm -lpthread -DSPI -DWPI
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -D__DRIVER__   
 ```
 
-----
+__DRIVER__  
+![](https://img.shields.io/badge/_IMPORTANT-important)  
+The information provided by sellers on Ebay or AliExpress is largely incorrect.   
+You waste time if you don't choose the right driver.   
+There are many [variations](http://domoticx.com/arduino-shield-2-4-tft-lcd-touch/) of the 2.4 inch shield.   
+You can use [this](https://github.com/prenticedavid/MCUFRIEND_kbv/tree/master/examples/LCD_ID_readreg) to find out your driver.   
+This is for Arduino UNO.   
+Do not use this on the RPI as the GPIO on the RPI is not 5V tolerant.   
 
-# Build for 8bit Parallel ILI9325 TFT using WiringPi/WiringOp library  
-Both of RPi/OPi   
+- ILI9225   
+- ILI9226(Same as ILI9225)   
+- ILI9320   
+- ILI9325   
+- ILI9327   
+- ILI9340   
+- ILI9341   
+- ILI9342   
+- ILI9481   
+- ILI9486   
+- ILI9488   
+- LGDP4532   
+- R61509V   
+- S6D1121   
+- SPFD5408(Same as ILI9320)   
+- ST7775(Same as ILI9225)   
+- ST7781   
+- ST7783(Same as ST7781)   
+- ST7793(Same as R61509)   
+- ST7796(Same as ILI9486)   
 
-```
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9325   
-```
-
-----
-
-# Build for 8bit Parallel ILI9327 TFT using WiringPi/WiringOp library   
-Both of RPi/OPi   
-
-```
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9327   
-```
-
-----
-
-# Build for 8bit Parallel ILI9341 TFT using WiringPi/WiringOp library   
-Both of RPi/OPi   
-
-```
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9341   
-```
-
-----
-
-# Build for 8bit Parallel ILI9342 TFT using WiringPi/WiringOp library   
-Both of RPi/OPi   
-
-```
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9342   
-```
-
-----
-
-# Build for 8bit Parallel ILI9481 TFT using WiringPi/WiringOp library   
-Both of RPi/OPi   
-
-```
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9481   
-```
-
-----
-
-# Build for 8bit Parallel SPFD5408 TFT using WiringPi/WiringOp library   
-Both of RPi/OPi   
-
-```
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DSPFD5408   
-```
-
-----
-
-# Build for 8bit Parallel S6D1121 TFT using WiringPi/WiringOp library  
-Both of RPi/OPi   
-
-```
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DS6D1121   
-```
-
-----
-
-# Build for 8bit Parallel R61505U TFT using WiringPi/WiringOp library  
-Both of RPi/OPi   
-
-```
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DR61505U   
-```
-
-----
-
-# Build for 8bit Parallel R61509V TFT using WiringPi/WiringOp library  
-Both of RPi/OPi   
-
-```
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DR61509V   
-```
-
-----
-
-# Build for 8bit Parallel ST7781 TFT using WiringPi/WiringOp library  
-Both of RPi/OPi   
-
-```
-git clone https://github.com/nopnop2002/wiringpi-tft-tool   
-cd wiringpi-tft-tool   
-cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DST7781   
-```
 
 ----
 

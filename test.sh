@@ -7,6 +7,14 @@ sudo ./tft s
 echo -n "push Enter"
 read input
 
+./tft P1 1
+./tft P2 2
+./tft P3 3
+./tft P4 4
+sudo ./tft s
+echo -n "push Enter"
+read input
+
 ./tft B0 BLACK
 ./tft F1 WHITE
 ./tft F2 WHITE
