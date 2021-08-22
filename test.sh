@@ -49,6 +49,7 @@ read input
 ./tft F4 GRAY
 ./tft R0
 sudo ./tft s
+echo -n "push Enter"
 read input
 
 ./tft R180
@@ -56,3 +57,6 @@ sudo ./tft s
 echo -n "push Enter"
 read input
 
+./tft r
+./tft B0 BLACK
+sudo ./tft s
