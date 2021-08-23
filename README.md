@@ -204,6 +204,13 @@ __Never believe the seller's information.__
 - ST7796(Same as ILI9486)   
 
 
+Example of build:   
+```
+git clone https://github.com/nopnop2002/wiringpi-tft-tool   
+cd wiringpi-tft-tool   
+cc -o tft tft.c fontx.c 8bitlib.c -lwiringPi -lm -lpthread -DILI9341   
+```
+
 ----
 
 # How to use   
