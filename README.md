@@ -180,6 +180,7 @@ There are many [variations](http://domoticx.com/arduino-shield-2-4-tft-lcd-touch
 You can use [this](https://github.com/prenticedavid/MCUFRIEND_kbv/tree/master/examples/LCD_ID_readreg) to find out your driver.   
 This is for Arduino UNO.   
 Do not use this on the RPI as the GPIO on the RPI is not 5V tolerant.   
+__Never believe the seller's information.__   
 
 - ILI9225   
 - ILI9226(Same as ILI9225)   
