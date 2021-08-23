@@ -1,9 +1,10 @@
 # wiringpi-tft-tool
-TFT Command Line Tool for Raspberry Pi/Orange Pi   
+TFT Command Line Tool for Raspberry Pi.   
+This may works with other boards like OrangePi/NanoPi.   
 
 You can operate from command line.   
 You can show any text string.   
-You can choose BCM2835 library/WiringPi(WiringOp) library.   
+You can choose BCM2835 library/WiringPi library.   
 
 # Support driver
 
@@ -70,21 +71,36 @@ From Left Top to Right Buttom.
 
 ![8bit-tft-1](https://user-images.githubusercontent.com/6020549/29200753-d60c3d90-7e92-11e7-8888-73a2d4bda61e.JPG)
 
+
+---
+
+# Software requirement   
+- WiringPi Library   
+ This project uses the wiringPiSetupGpio() function to initialize GPIOs.   
+ If you use it on a board other than the RPI board, you may need to change the GPIO number.   
+ As far as I know, there are these libraries.   
+	- WiringPi for OrangePi   
+	- WiringPi for OrangePi Zero   
+	- WiringPi for OrangePi3   
+	- WiringPi for BananaPi   
+	- WiringPi for NanoPi   
+	- WiringPi for Pine-64   
+
 ----
 
 # Wirering for SPI TFT   
 
-|TFT||Rpi/OPI|
-|:-:|:-:|:-:|
-|MISO|--|N/C|
-|LED|--|3.3V|
-|SCK|--|Pin#23(SPI SCLK)|
-|MOSI|--|Pin#19(SPI MOSI)|
-|RS|--|Pin#3(*)|
-|RST|--|Pin#5(*)|
-|CS|--|Pin#24(SPI CE0)(**)|
-|GND|--|GND|
-|VCC|--|3.3V|
+|TFT||Rpi|Symbol|
+|:-:|:-:|:-:|:-:|
+|MISO|--|N/C||
+|LED|--|3.3V||
+|SCK|--|Pin#23|SPI SCLK|
+|MOSI|--|Pin#19|SPI MOSI|
+|RS|--|Pin#3(*)|GPIO2|
+|RST|--|Pin#5(*)|GPIO3|
+|CS|--|Pin#24|SPI CE0(**)|
+|GND|--|GND||
+|VCC|--|3.3V||
 
 \*You can change any pin.   
 \**You can choose CE0 or CE1.   
@@ -125,24 +141,24 @@ cc -o tft tft.c fontx.c spilib.c -lwiringPi -lm -lpthread -DSPI -DWPI
 
 # Wirering for 8bit Parallel TFT   
 
-|TFT||Rpi/Opi|
-|:-:|:-:|:-:|
-|LCD_RST|--|Pin#7|
-|LCD_CS|--|Pin#3|
-|LCD_RS|--|Pin#5|
-|LCD_WR|--|Pin#26|
-|LCD_RD|--|Pin#28|
-|LCD_D0|--|Pin#29|
-|LCD_D1|--|Pin#31|
-|LCD_D2|--|Pin#33|
-|LCD_D3|--|Pin#35|
-|LCD_D4|--|Pin#37|
-|LCD_D5|--|Pin#32|
-|LCD_D6|--|Pin#36|
-|LCD_D7|--|Pin#38|
-|5V|--|5V(*)|
-|3.3V|--|3.3V(*)|
-|GND|--|GND|
+|TFT||Rpi|Symbol|
+|:-:|:-:|:-:|:-:|
+|LCD_RST|--|Pin#7|GPIO4|
+|LCD_CS|--|Pin#3|GPIO2|
+|LCD_RS|--|Pin#5|GPIO3|
+|LCD_WR|--|Pin#26|GPIO7|
+|LCD_RD|--|Pin#28|GPIO1|
+|LCD_D0|--|Pin#29|GPIO5|
+|LCD_D1|--|Pin#31|GPIO6|
+|LCD_D2|--|Pin#33|GPIO13|
+|LCD_D3|--|Pin#35|GPIO19|
+|LCD_D4|--|Pin#37|GPIO26|
+|LCD_D5|--|Pin#32|GPIO12|
+|LCD_D6|--|Pin#36|GPIO16|
+|LCD_D7|--|Pin#38|GPIO20|
+|5V|--|5V(*)||
+|3.3V|--|3.3V(*)||
+|GND|--|GND||
 
 \*When a regulator(It's often AMS1117) is mounted on the back, it's operated 5V.   
 \*When a regulator is NOT mounted on the back, it's operated 3.3V.   

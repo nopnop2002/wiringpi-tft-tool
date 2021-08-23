@@ -164,8 +164,9 @@ void lcdInit(uint16_t model, int16_t width, int16_t height, int offsetx, int off
 	LCD_D6	= pin.d6;
 	LCD_D7	= pin.d7;
 
-	if(wiringPiSetup() == -1) {
-		printf("Setup Fail\n");
+	//if(wiringPiSetup() == -1) {
+	if(wiringPiSetupGpio() == -1) {
+		printf("wiringPiSetupGpio Fail\n");
 		return;
 	}
 
