@@ -77,11 +77,11 @@ void lcdWriteDataByte(uint8_t c){
 
 // Write Data 16Bit
 void lcdWriteDataWord(uint16_t w){
-	uint8_t hi,lo;
-	hi = (w >> 8) & 0xFF;
-	lo = w & 0xFF;
-	lcdWriteDataByte(hi);
-	lcdWriteDataByte(lo);
+	digitalWrite(RS, HIGH);
+	digitalWrite(CS, LOW);
+	w = (w << 8) | (w >> 8);
+	wiringPiSPIDataRW(CH, (uint8_t *)&w, 2);
+	digitalWrite(CS, HIGH);
 }
 
 // Write Data 16Bit
